@@ -17,35 +17,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.bgWhite,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 75.h,
-          ),
-          const LogoWidget(width: 135, height: 142),
-          SizedBox(
-            height: 40.h,
-          ),
-          Container(
-            width: 345.w,
-            height: 540.h,
-            padding: EdgeInsets.fromLTRB(18.w, 32.h, 18.w, 0),
-            decoration: BoxDecoration(
-              color: AppColors.bgWhite,
-              borderRadius: BorderRadius.circular(14.r),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.bgBlack.withOpacity(0.2),
-                  blurRadius: 10,
-                  spreadRadius: 3,
-                  offset: const Offset(4, 4),
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 75.h,
             ),
-            child: const LoginWidget(),
-          )
-        ],
+            const LogoWidget(width: 135, height: 142),
+            SizedBox(
+              height: 40.h,
+            ),
+            Container(
+              width: 345.w,
+              height: 540.h,
+              padding: EdgeInsets.fromLTRB(18.w, 32.h, 18.w, 0),
+              decoration: BoxDecoration(
+                color: AppColors.bgWhite,
+                borderRadius: BorderRadius.circular(14.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.bgBlack.withOpacity(0.2),
+                    blurRadius: 10,
+                    spreadRadius: 3,
+                    offset: const Offset(4, 4),
+                  ),
+                ],
+              ),
+              child: const LoginWidget(),
+            )
+          ],
+        ),
       ),
     );
   }
