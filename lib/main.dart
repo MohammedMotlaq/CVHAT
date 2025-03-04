@@ -1,4 +1,4 @@
-import 'package:cvhat/views/splash/splash_screen.dart';
+import 'package:cvhat/src/screens/splash_splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
