@@ -1,3 +1,5 @@
+import 'package:cvhat/app_router.dart';
+import 'package:cvhat/views/auth/register_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/resources/app_colors.dart';
@@ -15,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      //Navigation to next screen
+      AppRouter.pushWidget(const RegisterScreen());
     });
   }
 
