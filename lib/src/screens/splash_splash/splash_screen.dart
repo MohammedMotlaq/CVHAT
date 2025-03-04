@@ -1,6 +1,7 @@
-import 'package:cvhat/src/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../core/resources/app_colors.dart';
+import '../../widgets/logo_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,10 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-          child: Image.asset(AppIcons.logo, width: 177.w, height: 189.h)),
+    return const Scaffold(
+      backgroundColor: AppColors.bgWhite,
+      body: LogoWidget(
+        width: 177,
+        height: 189,
+      ),
     );
   }
 }
