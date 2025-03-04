@@ -49,9 +49,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child:
                   Consumer<UiProvider>(builder: (context, uiProvider, child) {
-                return uiProvider.haveAccount
-                    ? const LoginWidget()
-                    : const SignupWidget();
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 600),
+                  switchInCurve: Curves.easeInOut,
+                  switchOutCurve: Curves.easeInOut,
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    final slideAnimation = Tween<Offset>(
+                      begin: const Offset(1.0, 0.0),
+                      end: Offset.zero,
+                    ).animate(animation);
+
+                    final fadeAnimation = Tween<double>(
+                      begin: 0.0,
+                      end: 1.0,
+                    ).animate(animation);
+
+                    return FadeTransition(
+                      opacity: fadeAnimation,
+                      child: SlideTransition(
+                        position: slideAnimation,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: uiProvider.haveAccount
+                      ? const LoginWidget(key: ValueKey('login'))
+                      : const SignupWidget(key: ValueKey('signup')),
+                );
               }),
             )
           ],
