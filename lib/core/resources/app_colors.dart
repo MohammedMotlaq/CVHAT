@@ -16,4 +16,5 @@ class AppColors {
   static const Color textBlack = Colors.black;
   static const Color textPrimary = Color.fromRGBO(0, 23, 31, 1.0);
   static const Color textSecondary = Color.fromRGBO(0, 52, 89, 1.0);
+  static const Color  textAccent = Color.fromRGBO(0, 166, 251, 1.0);
 }
