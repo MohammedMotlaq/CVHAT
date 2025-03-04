@@ -1,9 +1,12 @@
 import 'package:cvhat/core/resources/app_colors.dart';
-import 'package:cvhat/main.dart';
 import 'package:cvhat/views/auth/widgets/login_widget.dart';
+import 'package:cvhat/views/auth/widgets/signup_widget.dart';
 import 'package:cvhat/widgets/logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../../providers/ui_provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -44,7 +47,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ],
               ),
-              child: const LoginWidget(),
+              child:
+                  Consumer<UiProvider>(builder: (context, uiProvider, child) {
+                return uiProvider.haveAccount
+                    ? const LoginWidget()
+                    : const SignupWidget();
+              }),
             )
           ],
         ),

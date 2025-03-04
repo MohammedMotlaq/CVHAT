@@ -1,6 +1,8 @@
+import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import 'app_router.dart';
 
@@ -13,20 +15,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-        designSize: const Size(390, 844),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return MaterialApp(
-            navigatorKey: AppRouter.navKey,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-              useMaterial3: true,
-            ),
-            debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
-          );
-        });
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<UiProvider>(create: (context) => UiProvider()),
+      ],
+      child: ScreenUtilInit(
+          designSize: const Size(390, 844),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          builder: (context, child) {
+            return MaterialApp(
+              navigatorKey: AppRouter.navKey,
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+              ),
+              debugShowCheckedModeBanner: false,
+              home: const SplashScreen(),
+            );
+          }),
+    );
   }
 }

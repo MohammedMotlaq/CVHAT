@@ -1,8 +1,10 @@
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -98,35 +100,39 @@ class _LoginWidgetState extends State<LoginWidget> {
         SizedBox(
           height: 20.h,
         ),
-        Center(
-          child: TextButton(
-              style: TextButton.styleFrom(
-                  minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
-              onPressed: () {},
-              child: SizedBox(
-                width: 144.w,
-                height: 25.h,
-                child: Row(
-                  children: [
-                    Text(
-                      "Create new account",
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.normal),
-                    ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: AppColors.textSecondary,
-                      size: 20.w,
-                    )
-                  ],
-                ),
-              )),
-        ),
+        Consumer<UiProvider>(builder: (context, uiProvider, child) {
+          return Center(
+            child: TextButton(
+                style: TextButton.styleFrom(
+                    minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
+                onPressed: () {
+                  uiProvider.haveAccountChange();
+                },
+                child: SizedBox(
+                  width: 144.w,
+                  height: 25.h,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Create new account",
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: AppColors.textSecondary,
+                            fontWeight: FontWeight.normal),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: AppColors.textSecondary,
+                        size: 20.w,
+                      )
+                    ],
+                  ),
+                )),
+          );
+        }),
       ],
     );
   }
