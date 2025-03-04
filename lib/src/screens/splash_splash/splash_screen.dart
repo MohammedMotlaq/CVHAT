@@ -1,5 +1,6 @@
 import 'package:cvhat/src/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -8,7 +9,8 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(child: Image.asset(AppIcons.logo, width: 150, height: 150)),
+      body: Center(
+          child: Image.asset(AppIcons.logo, width: 177.w, height: 189.h)),
     );
   }
 }
