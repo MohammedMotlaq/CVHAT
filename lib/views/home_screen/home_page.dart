@@ -1,4 +1,5 @@
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,13 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 40.h,
               ),
-              Row()
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ReviewCard(label: "AI Reviews", value: "7"),
+                  ReviewCard(label: "Recruiter Feedback", value: "7"),
+                ],
+              ),
             ],
           )),
     );
