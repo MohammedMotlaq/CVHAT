@@ -1,5 +1,7 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/ui_provider.dart';
+import 'package:cvhat/views/home_screen/home_page.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +99,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             height: 55,
             width: 248,
             title: 'Login',
-            onTap: () {},
+            onTap: () {
+              AppRouter.pushWithReplacement(const HomePage());
+            },
           ),
           SizedBox(
             height: 20.h,
