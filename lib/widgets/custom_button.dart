@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
             minimumSize: Size(width.w, height.h),
             elevation: 5.h,
           ),
-          onPressed: () => onTap,
+          onPressed: () => onTap(),
           child: Text(
             title,
             style: TextStyle(
