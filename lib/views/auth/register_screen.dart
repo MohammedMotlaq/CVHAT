@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/views/auth/widgets/forget_password_widget.dart';
 import 'package:cvhat/views/auth/widgets/login_widget.dart';
 import 'package:cvhat/views/auth/widgets/signup_widget.dart';
 import 'package:cvhat/widgets/logo_widget.dart';
@@ -50,11 +51,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child:
                   Consumer<UiProvider>(builder: (context, uiProvider, child) {
-                return AppRouter.animatedSwitcher(
-                  uiProvider.haveAccount
-                      ? const SignupWidget()
-                      : const LoginWidget(),
-                );
+                return AppRouter.animatedSwitcher(uiProvider.resetPassword
+                    ? const ForgetPasswordWidget()
+                    : uiProvider.haveAccount
+                        ? const LoginWidget()
+                        : const SignupWidget());
               }),
             )
           ],

@@ -79,17 +79,22 @@ class _LoginWidgetState extends State<LoginWidget> {
               SizedBox(
                 width: 3.w,
               ),
-              TextButton(
-                  style: TextButton.styleFrom(
-                      minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
-                  onPressed: () {},
-                  child: Text(
-                    "Reset here",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: AppColors.textAccent,
-                        fontWeight: FontWeight.normal),
-                  )),
+              Consumer<UiProvider>(builder: (context, uiProvider, child) {
+                return TextButton(
+                    style: TextButton.styleFrom(
+                        minimumSize: Size(70.w, 12.h),
+                        padding: EdgeInsets.zero),
+                    onPressed: () {
+                      uiProvider.resetPasswordChange();
+                    },
+                    child: Text(
+                      "Reset here",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: AppColors.textAccent,
+                          fontWeight: FontWeight.normal),
+                    ));
+              }),
             ],
           ),
           SizedBox(
