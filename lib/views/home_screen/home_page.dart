@@ -1,6 +1,7 @@
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
+import 'package:cvhat/widgets/recent_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,6 +34,32 @@ class HomePage extends StatelessWidget {
                   ReviewCard(label: "AI Reviews", value: "7"),
                   ReviewCard(label: "Recruiter Feedback", value: "7"),
                 ],
+              ),
+              SizedBox(
+                height: 38.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Recents",
+                    style: TextStyle(
+                        fontSize: 20.sp, color: AppColors.textSecondary),
+                  ),
+                  Text(
+                    "View All >",
+                    style: TextStyle(
+                        fontSize: 20.sp, color: AppColors.textSecondary),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 38.h,
+              ),
+              const RecentReviewCard(
+                title: "Title",
+                uploadDate: "24 Aug 2025",
+                fileName: "File name.pdf",
               ),
             ],
           )),
