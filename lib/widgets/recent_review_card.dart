@@ -1,17 +1,12 @@
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/models/review_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecentReviewCard extends StatelessWidget {
-  final String title;
-  final String fileName;
-  final String uploadDate;
+  final ReviewDetails review;
 
-  const RecentReviewCard(
-      {super.key,
-      required this.title,
-      required this.fileName,
-      required this.uploadDate});
+  const RecentReviewCard({super.key, required this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +37,7 @@ class RecentReviewCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        title,
+                        review.title,
                         style: TextStyle(
                             fontSize: 20.sp,
                             color: AppColors.textWhite,
@@ -65,14 +60,14 @@ class RecentReviewCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        fileName,
+                        review.fileName,
                         style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.textWhite,
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        uploadDate,
+                        review.uploadDate,
                         style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.textWhite,
