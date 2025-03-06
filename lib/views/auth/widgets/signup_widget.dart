@@ -119,7 +119,7 @@ class _SignupWidgetState extends State<SignupWidget> {
                   style: TextButton.styleFrom(
                       minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
                   onPressed: () {
-                    uiProvider.haveAccountChange();
+                    uiProvider.setAuthState(AuthState.login);
                   },
                   child: SizedBox(
                     width: 144.w,

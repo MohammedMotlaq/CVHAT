@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
-class UiProvider extends ChangeNotifier {
-  bool haveAccount = true;
+enum AuthState { login, signup, forgetPassword, otp, confirmPassword }
 
-  void haveAccountChange() {
-    haveAccount = !haveAccount;
+class UiProvider extends ChangeNotifier {
+  AuthState _authState = AuthState.login;
+
+  AuthState get authState => _authState;
+
+  void setAuthState(AuthState state) {
+    _authState = state;
     notifyListeners();
   }
 }

@@ -1,26 +1,18 @@
-import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/ui_provider.dart';
-import 'package:cvhat/views/home_screen/home_page.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginWidget extends StatefulWidget {
+class LoginWidget extends StatelessWidget {
   const LoginWidget({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
-}
-
-class _LoginWidgetState extends State<LoginWidget> {
-  TextEditingController controller = TextEditingController();
-  TextEditingController controller1 = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
+    TextEditingController controller = TextEditingController();
+    TextEditingController controller1 = TextEditingController();
     return Container(
       color: AppColors.bgWhite,
       child: Column(
@@ -41,104 +33,86 @@ class _LoginWidgetState extends State<LoginWidget> {
                 fontSize: 15.sp,
                 fontWeight: FontWeight.normal),
           ),
-          SizedBox(
-            height: 20.h,
-          ),
+          SizedBox(height: 20.h),
           CustomTextField(
             width: 309,
             height: 50,
             textInputAction: TextInputAction.next,
-            textEditingController: controller,
             hintText: 'Email',
             inputType: TextInputType.emailAddress,
+            textEditingController: controller,
           ),
-          SizedBox(
-            height: 20.h,
-          ),
+          SizedBox(height: 20.h),
           CustomTextField(
             width: 309,
             height: 50,
             textInputAction: TextInputAction.done,
-            textEditingController: controller1,
             hintText: 'Password',
             inputType: TextInputType.visiblePassword,
             obscure: true,
+            textEditingController: controller1,
           ),
-          SizedBox(
-            height: 20.h,
-          ),
+          SizedBox(height: 20.h),
           Row(
             children: [
-              Text(
-                "Forgot your password?",
-                style: TextStyle(
-                    fontSize: 13.sp,
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.normal),
+              Text("Forgot your password?",
+                  style: TextStyle(
+                      fontSize: 13.sp,
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.normal)),
+              SizedBox(width: 3.w),
+              Consumer<UiProvider>(
+                builder: (context, uiProvider, child) {
+                  return TextButton(
+                    onPressed: () {
+                      uiProvider.setAuthState(AuthState.forgetPassword);
+                    },
+                    child: Text(
+                      "Reset here",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: AppColors.textAccent,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  );
+                },
               ),
-              SizedBox(
-                width: 3.w,
-              ),
-              TextButton(
-                  style: TextButton.styleFrom(
-                      minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
-                  onPressed: () {},
-                  child: Text(
-                    "Reset here",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: AppColors.textAccent,
-                        fontWeight: FontWeight.normal),
-                  )),
             ],
           ),
-          SizedBox(
-            height: 93.h,
-          ),
+          SizedBox(height: 93.h),
           CustomButton(
             height: 55,
             width: 248,
             title: 'Login',
-            onTap: () {
-              AppRouter.pushWithReplacement(const HomePage());
-            },
+            onTap: () {},
           ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Consumer<UiProvider>(builder: (context, uiProvider, child) {
-            return Center(
-              child: TextButton(
-                  style: TextButton.styleFrom(
-                      minimumSize: Size(70.w, 12.h), padding: EdgeInsets.zero),
+          SizedBox(height: 20.h),
+          Consumer<UiProvider>(
+            builder: (context, uiProvider, child) {
+              return Center(
+                child: TextButton(
                   onPressed: () {
-                    uiProvider.haveAccountChange();
+                    uiProvider.setAuthState(AuthState.signup);
                   },
                   child: SizedBox(
                     width: 144.w,
                     height: 25.h,
                     child: Row(
                       children: [
-                        Text(
-                          "Create new account",
-                          style: TextStyle(
-                              fontSize: 13.sp,
-                              color: AppColors.textSecondary,
-                              fontWeight: FontWeight.normal),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        Icon(
-                          Icons.arrow_forward,
-                          color: AppColors.textSecondary,
-                          size: 20.w,
-                        )
+                        Text("Create new account",
+                            style: TextStyle(
+                                fontSize: 13.sp,
+                                color: AppColors.textSecondary)),
+                        SizedBox(width: 5.w),
+                        Icon(Icons.arrow_forward,
+                            color: AppColors.textSecondary, size: 20.w),
                       ],
                     ),
-                  )),
-            );
-          }),
+                  ),
+                ),
+              );
+            },
+          ),
         ],
       ),
     );
