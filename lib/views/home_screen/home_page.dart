@@ -1,4 +1,7 @@
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/data/dummy_data.dart';
+import 'package:cvhat/models/review_details.dart';
+import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:cvhat/widgets/recent_review_card.dart';
@@ -10,59 +13,84 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<ReviewDetails> recents = DummyData.aiReviews
+        .take(3)
+        .map((json) => ReviewDetails.fromJson(json))
+        .toList();
     return Scaffold(
       backgroundColor: AppColors.secondary,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(70.h),
           child: const CustomAppbar(userName: "userName")),
-      body: Container(
-          width: 390.w,
-          decoration: BoxDecoration(
-              color: AppColors.bgWhite,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.r),
-                  topRight: Radius.circular(30.r))),
-          padding: EdgeInsets.symmetric(horizontal: 18.w),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 40.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
+        children: [
+          Container(
+              width: 390.w,
+              decoration: BoxDecoration(
+                  color: AppColors.bgWhite,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30.r),
+                      topRight: Radius.circular(30.r))),
+              padding: EdgeInsets.symmetric(horizontal: 18.w),
+              child: Column(
                 children: [
-                  ReviewCard(label: "AI Reviews", value: "7"),
-                  ReviewCard(label: "Recruiter Feedback", value: "7"),
-                ],
-              ),
-              SizedBox(
-                height: 38.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Recents",
-                    style: TextStyle(
-                        fontSize: 20.sp, color: AppColors.textSecondary),
+                  SizedBox(
+                    height: 40.h,
                   ),
-                  Text(
-                    "View All >",
-                    style: TextStyle(
-                        fontSize: 20.sp, color: AppColors.textSecondary),
-                  )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ReviewCard(label: "AI Reviews", value: "7"),
+                      ReviewCard(label: "Recruiter Feedback", value: "7"),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Recents",
+                        style: TextStyle(
+                            fontSize: 20.sp, color: AppColors.textSecondary),
+                      ),
+                      Text(
+                        "View All >",
+                        style: TextStyle(
+                            fontSize: 20.sp, color: AppColors.textSecondary),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  RecentReviewsList(recentReviews: recents),
                 ],
-              ),
-              SizedBox(
-                height: 38.h,
-              ),
-              const RecentReviewCard(
-                title: "Title",
-                uploadDate: "24 Aug 2025",
-                fileName: "File name.pdf",
-              ),
-            ],
-          )),
+              )),
+          Positioned(
+              bottom: 20.h,
+              right: 14.w,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Define the button action here
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: const CircleBorder(),
+                  backgroundColor: AppColors.secondary_3,
+                  elevation: 9,
+                  shadowColor: Colors.black,
+                  minimumSize:
+                      Size(60.w, 60.h), // Circular button with 60 radius
+                ),
+                child: Icon(
+                  Icons.add_rounded, // Or any icon you want to use
+                  size: 32.sp,
+                  color: Colors.white,
+                ),
+              )),
+        ],
+      ),
     );
   }
 }
