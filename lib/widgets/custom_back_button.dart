@@ -7,7 +7,9 @@ import '../app_router.dart';
 import '../core/resources/app_colors.dart';
 
 class CustomBackButton extends StatelessWidget {
-  const CustomBackButton({super.key});
+  const CustomBackButton({super.key, required this.onTap});
+
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +23,7 @@ class CustomBackButton extends StatelessWidget {
             elevation: 0,
             padding: EdgeInsets.zero,
           ),
-          onPressed: () {
-            uiProvider.resetPasswordChange();
-          },
+          onPressed: () => onTap(),
           child: Icon(
             Icons.arrow_back,
             size: 25.w,

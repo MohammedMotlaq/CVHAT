@@ -49,14 +49,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ],
               ),
-              child:
-                  Consumer<UiProvider>(builder: (context, uiProvider, child) {
-                return AppRouter.animatedSwitcher(uiProvider.resetPassword
-                    ? const ForgetPasswordWidget()
-                    : uiProvider.haveAccount
-                        ? const LoginWidget()
-                        : const SignupWidget());
-              }),
+              child: Consumer<UiProvider>(
+                builder: (context, uiProvider, child) {
+                  return AppRouter.animatedSwitcher(
+                    _getAuthWidget(uiProvider.authState),
+                  );
+                },
+              ),
             )
           ],
         ),
@@ -64,3 +63,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 }
+
+Widget _getAuthWidget(AuthState state) {
+  switch (state) {
+    case AuthState.login:
+      return const LoginWidget();
+    case AuthState.signup:
+      return const SignupWidget();
+    case AuthState.forgetPassword:
+      return const ForgetPasswordWidget();
+  // case AuthState.otp:
+  //   return const OtpWidget();
+  // case AuthState.confirmPassword:
+  //   return const ConfirmPasswordWidget();
+    default:
+      return const LoginWidget();
+  }
+}
+

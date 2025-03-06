@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
+enum AuthState { login, signup, forgetPassword, otp, confirmPassword }
+
 class UiProvider extends ChangeNotifier {
-  bool haveAccount = true;
-  bool resetPassword = false;
+  AuthState _authState = AuthState.login;
 
-  void resetPasswordChange() {
-    resetPassword = !resetPassword;
-    notifyListeners();
-  }
+  AuthState get authState => _authState;
 
-  void haveAccountChange() {
-    haveAccount = !haveAccount;
+  void setAuthState(AuthState state) {
+    _authState = state;
     notifyListeners();
   }
 }
