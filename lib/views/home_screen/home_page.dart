@@ -1,8 +1,10 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/data/dummy_data.dart';
 import 'package:cvhat/models/review_details.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
+import 'package:cvhat/views/reviews_history/reviews_history.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:cvhat/widgets/recent_review_card.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +47,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 30.h,
+                    height: 15.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,17 +57,20 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20.sp, color: AppColors.textSecondary),
                       ),
-                      Text(
-                        "View All >",
-                        style: TextStyle(
-                            fontSize: 20.sp, color: AppColors.textSecondary),
-                      )
+                      TextButton(
+                          onPressed: () {
+                            AppRouter.pushWidget(const ReviewsHistory());
+                          },
+                          child: Text(
+                            "View All >",
+                            style: TextStyle(
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.normal,
+                                color: AppColors.textSecondary),
+                          ))
                     ],
                   ),
-                  SizedBox(
-                    height: 30.h,
-                  ),
-                  RecentReviewsList(recentReviews: recents),
+                  RecentReviewsList(recentReviews: recents, scrollable: false),
                 ],
               )),
           Positioned(
