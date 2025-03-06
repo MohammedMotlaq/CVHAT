@@ -5,16 +5,25 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecentReviewsList extends StatelessWidget {
   final List<ReviewDetails> recentReviews;
+  final double height;
+  final bool scrollable;
 
-  const RecentReviewsList({Key? key, required this.recentReviews})
+  const RecentReviewsList(
+      {Key? key,
+      required this.recentReviews,
+      this.height = 500,
+      this.scrollable = true})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 450.h,
+      height: height.h,
       child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.only(top: 28.h),
+        physics: scrollable
+            ? const AlwaysScrollableScrollPhysics()
+            : const NeverScrollableScrollPhysics(),
         separatorBuilder: (context, index) => SizedBox(height: 25.h),
         itemCount: recentReviews.length,
         itemBuilder: (context, index) {
