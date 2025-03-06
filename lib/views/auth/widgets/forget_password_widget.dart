@@ -64,7 +64,9 @@ class ForgetPasswordWidget extends StatelessWidget {
               height: 55,
               width: 248,
               title: 'Send',
-              onTap: () {},
+              onTap: () {
+                uiProvider.setAuthState(AuthState.otp);
+              },
             ),
             SizedBox(
               height: 20.h,
