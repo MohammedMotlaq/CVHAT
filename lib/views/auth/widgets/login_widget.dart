@@ -1,3 +1,4 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_button.dart';
@@ -5,6 +6,8 @@ import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../home_screen/home_page.dart';
 
 class LoginWidget extends StatelessWidget {
   const LoginWidget({super.key});
@@ -84,7 +87,9 @@ class LoginWidget extends StatelessWidget {
             height: 55,
             width: 248,
             title: 'Login',
-            onTap: () {},
+            onTap: () {
+              AppRouter.pushWidget(const HomePage());
+            },
           ),
           SizedBox(height: 20.h),
           Consumer<UiProvider>(

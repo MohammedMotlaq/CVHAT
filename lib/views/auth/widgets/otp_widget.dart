@@ -94,7 +94,9 @@ class OtpWidget extends StatelessWidget {
               height: 55,
               width: 248,
               title: 'Confirm',
-              onTap: () {},
+              onTap: () {
+                uiProvider.setAuthState(AuthState.confirmPassword);
+              },
             ),
             SizedBox(
               height: 20.h,
