@@ -5,8 +5,8 @@ import 'package:cvhat/models/review_details.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/views/reviews_history/reviews_history.dart';
+import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
-import 'package:cvhat/widgets/recent_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -78,7 +78,7 @@ class HomePage extends StatelessWidget {
               right: 14.w,
               child: ElevatedButton(
                 onPressed: () {
-                  // Define the button action here
+                  AppRouter.pushWidget(const UploadCv());
                 },
                 style: ElevatedButton.styleFrom(
                   shape: const CircleBorder(),

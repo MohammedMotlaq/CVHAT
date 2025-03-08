@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
   provider: ^6.1.2
+  file_picker: ^9.0.2
+
 
 dev_dependencies:
   flutter_test:
