@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/views/auth/widgets/confirm_password_widget.dart';
 import 'package:cvhat/views/auth/widgets/forget_password_widget.dart';
 import 'package:cvhat/views/auth/widgets/login_widget.dart';
 import 'package:cvhat/views/auth/widgets/otp_widget.dart';
@@ -75,8 +76,8 @@ Widget _getAuthWidget(AuthState state) {
       return const ForgetPasswordWidget();
     case AuthState.otp:
       return const OtpWidget();
-    // case AuthState.confirmPassword:
-    //   return const ConfirmPasswordWidget();
+    case AuthState.confirmPassword:
+      return const ConfirmPasswordWidget();
     default:
       return const LoginWidget();
   }
