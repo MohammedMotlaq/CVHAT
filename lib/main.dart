@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               navigatorKey: AppRouter.navKey,
               theme: ThemeData(
+                fontFamily: 'Inter',
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
