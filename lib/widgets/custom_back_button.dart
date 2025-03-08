@@ -19,7 +19,7 @@ class CustomBackButton extends StatelessWidget {
             minimumSize: Size(91.w, 60.h),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14.r)),
-            backgroundColor: AppColors.primary.withOpacity(0.1),
+            backgroundColor: AppColors.bgGray,
             elevation: 0,
             padding: EdgeInsets.zero,
           ),
