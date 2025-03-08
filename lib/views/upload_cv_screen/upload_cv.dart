@@ -1,11 +1,11 @@
+import 'dart:ui';
+
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/file_picker_provider.dart';
-import 'package:cvhat/views/home_screen/home_page.dart';
 import 'package:cvhat/views/upload_cv_screen/widgets/upload_cv_app_bar.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/custom_text_field.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -25,68 +25,100 @@ class UploadCv extends StatelessWidget {
           width: 390.w,
           child: Consumer<FilePickerProvider>(
             builder: (context, filePickerProvider, child) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Material(
-                    child: InkWell(
-                      onTap: () {
-                        filePickerProvider.pickFile(
-                            allowedExtensions: ["pdf", "doc", "docx"]);
-                      },
-                      child: Container(
-                        height: 300.h,
-                        width: 300.w,
-                        decoration: BoxDecoration(
-                          color: AppColors.secondary,
-                          borderRadius: BorderRadius.circular(40.r),
+              return SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Material(
+                      child: GestureDetector(
+                        onTap: () {
+                          filePickerProvider.pickFile(
+                              allowedExtensions: ["pdf", "doc", "docx"]);
+                        },
+                        child: CustomPaint(
+                          painter: DottedBorderPainter(
+                            color: AppColors.secondary,
+                            strokeWidth: 2,
+                            gap: 6,
+                            borderRadius: 40.r, // Adjust corner radius
+                          ),
+                          child: Container(
+                            height: 300.h,
+                            width: 300.w,
+                            decoration: BoxDecoration(
+                              color: AppColors.secondary.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(40.r),
+                            ),
+                            child: filePickerProvider.selectedFile != null
+                                ? filePickerProvider.buildFilePreview()
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.file_upload_outlined,
+                                        color: AppColors.secondary,
+                                        size: 48.sp,
+                                      ),
+                                      Text(
+                                        "Click To Upload",
+                                        style: TextStyle(
+                                            color: AppColors.secondary,
+                                            fontSize: 16.sp),
+                                      )
+                                    ],
+                                  ),
+                          ),
                         ),
-                        child: filePickerProvider.selectedFile != null
-                            ? filePickerProvider.buildFilePreview()
-                            : Icon(
-                                Icons.file_upload_outlined,
-                                color: AppColors.bgWhite,
-                                size: 48.sp,
-                              ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    child: Text(
-                      filePickerProvider.selectedFile != null
-                          ? filePickerProvider.selectedFile!.name
-                          : "Select a file",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.secondary,
-                          fontSize: 32.sp),
+                    SizedBox(
+                      height: 20.h,
                     ),
-                  ),
-                  CustomTextField(
-                    width: 309,
-                    height: 50,
-                    textInputAction: TextInputAction.next,
-                    hintText: 'Submission Title',
-                    inputType: TextInputType.emailAddress,
-                    textEditingController: controller,
-                  ),
-                  CustomButton(
-                    height: 55,
-                    width: 248,
-                    title: 'Submit',
-                    onTap: () {
-                      AppRouter.popWidget();
-                    },
-                  ),
-                  SizedBox(
-                    height: 100.h,
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: filePickerProvider.selectedFile != null
+                          ? Text(
+                              filePickerProvider.selectedFile!.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32.sp,
+                                  color: AppColors.secondary),
+                            )
+                          : const SizedBox(),
+                    ),
+                    SizedBox(
+                      height: 45.h,
+                    ),
+                    CustomTextField(
+                      width: 309,
+                      height: 50,
+                      textInputAction: TextInputAction.done,
+                      hintText: 'Submission Title',
+                      inputType: TextInputType.text,
+                      textEditingController: controller,
+                    ),
+                    SizedBox(
+                      height: 45.h,
+                    ),
+                    CustomButton(
+                      height: 55,
+                      width: 248,
+                      title: 'Submit',
+                      onTap: () {
+                        AppRouter.popWidget();
+                      },
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    )
+                  ],
+                ),
               );
             },
           ),
@@ -94,4 +126,50 @@ class UploadCv extends StatelessWidget {
       ),
     );
   }
+}
+
+class DottedBorderPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  final double gap;
+  final double borderRadius;
+
+  DottedBorderPainter({
+    required this.color,
+    this.strokeWidth = 2.0,
+    this.gap = 5.0,
+    this.borderRadius = 10.0,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = color
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    final Path path = Path()
+      ..addRRect(RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        Radius.circular(borderRadius),
+      ));
+
+    drawDottedPath(canvas, path, paint);
+  }
+
+  void drawDottedPath(Canvas canvas, Path path, Paint paint) {
+    PathMetrics pathMetrics = path.computeMetrics();
+    for (PathMetric pathMetric in pathMetrics) {
+      double distance = 0.0;
+      while (distance < pathMetric.length) {
+        Path extractPath = pathMetric.extractPath(distance, distance + gap);
+        canvas.drawPath(extractPath, paint);
+        distance += gap * 2; // Adjust space between dots
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

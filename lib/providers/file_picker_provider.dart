@@ -49,10 +49,11 @@ class FilePickerProvider extends ChangeNotifier {
         ),
       );
     } else if (selectedFileExtension == "pdf") {
-      return Icon(Icons.picture_as_pdf, color: AppColors.bgWhite, size: 48.sp);
+      return Icon(Icons.picture_as_pdf,
+          color: AppColors.secondary, size: 48.sp);
     } else {
       return Icon(Icons.insert_drive_file,
-          color: AppColors.bgWhite, size: 48.sp);
+          color: AppColors.secondary, size: 48.sp);
     }
   }
 }
