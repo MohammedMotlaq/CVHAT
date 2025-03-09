@@ -98,13 +98,16 @@ class UploadCv extends StatelessWidget {
                                       ),
                                     )),
                                 Positioned(
-                                    bottom: 10.h,
-                                    left: 10.w,
-                                    child: FloatingActionButton(
-                                        backgroundColor: AppColors.secondary,
+                                    bottom: 10.w,
+                                    left: 0.w,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                AppColors.secondary,
+                                            shape: const CircleBorder()),
                                         child: Icon(
-                                          size: 40.sp,
-                                          Icons.cancel,
+                                          size: 24.sp,
+                                          Icons.clear,
                                           color: AppColors.bgWhite,
                                         ),
                                         onPressed: () {
