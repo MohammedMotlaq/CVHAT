@@ -1,0 +1,2 @@
+C:/Users/Mohammed/IdeaProjects/cvhat/android/app/.cxx/Debug/6c4b3m67/x86/CMakeFiles/edit_cache.dir
+C:/Users/Mohammed/IdeaProjects/cvhat/android/app/.cxx/Debug/6c4b3m67/x86/CMakeFiles/rebuild_cache.dir

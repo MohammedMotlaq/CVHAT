@@ -1,6 +1,9 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../views/profile_screen/profile_screen.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key, required this.userName});
@@ -30,10 +33,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         centerTitle: true,
         actions: [
-          Icon(
-            Icons.settings,
-            size: 40.r,
-            color: AppColors.bgWhite,
+          IconButton(
+            onPressed: () {
+              AppRouter.pushWidget(const ProfileScreen());
+            },
+            icon: Icon(Icons.settings, size: 40.r, color: AppColors.bgWhite),
           ),
         ],
       ),
