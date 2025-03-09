@@ -38,6 +38,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   provider: ^6.1.2
   file_picker: ^9.0.2
+  syncfusion_flutter_pdfviewer: ^28.2.9
 
 
 dev_dependencies:
