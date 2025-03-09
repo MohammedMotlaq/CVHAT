@@ -1,5 +1,4 @@
 import 'package:cvhat/providers.dart';
-import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
