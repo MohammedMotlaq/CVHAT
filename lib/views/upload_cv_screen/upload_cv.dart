@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:cvhat/app_router.dart';
@@ -9,6 +10,7 @@ import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 class UploadCv extends StatelessWidget {
   const UploadCv({super.key});
@@ -36,26 +38,26 @@ class UploadCv extends StatelessWidget {
                     Material(
                       child: GestureDetector(
                         onTap: () {
-                          filePickerProvider.pickFile(
-                              allowedExtensions: ["pdf", "doc", "docx"]);
+                          filePickerProvider
+                              .pickFile(allowedExtensions: ["pdf"]);
                         },
-                        child: CustomPaint(
-                          painter: DottedBorderPainter(
-                            color: AppColors.secondary,
-                            strokeWidth: 2,
-                            gap: 6,
-                            borderRadius: 40.r, // Adjust corner radius
-                          ),
-                          child: Container(
-                            height: 300.h,
-                            width: 300.w,
-                            decoration: BoxDecoration(
-                              color: AppColors.secondary.withOpacity(0.05),
-                              borderRadius: BorderRadius.circular(40.r),
-                            ),
-                            child: filePickerProvider.selectedFile != null
-                                ? filePickerProvider.buildFilePreview()
-                                : Column(
+                        child: filePickerProvider.selectedFile == null
+                            ? CustomPaint(
+                                painter: DottedBorderPainter(
+                                  color: AppColors.secondary,
+                                  strokeWidth: 2,
+                                  gap: 6,
+                                  borderRadius: 20.r, // Adjust corner radius
+                                ),
+                                child: Container(
+                                  height: 300.h,
+                                  width: 300.w,
+                                  decoration: BoxDecoration(
+                                    color:
+                                        AppColors.secondary.withOpacity(0.05),
+                                    borderRadius: BorderRadius.circular(20.r),
+                                  ),
+                                  child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -73,8 +75,42 @@ class UploadCv extends StatelessWidget {
                                       )
                                     ],
                                   ),
-                          ),
-                        ),
+                                ),
+                              )
+                            : Stack(children: [
+                                Container(
+                                    height: 300.h,
+                                    width: 300.w,
+                                    decoration: BoxDecoration(
+                                        color: AppColors.secondary
+                                            .withOpacity(0.05),
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                        border: Border.all()),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.r),
+                                      child: SfPdfViewer.file(
+                                        File(filePickerProvider
+                                            .selectedFile!.path!),
+                                        enableTextSelection: false,
+                                        maxZoomLevel: 1,
+                                        enableDoubleTapZooming: false,
+                                      ),
+                                    )),
+                                Positioned(
+                                    bottom: 10.h,
+                                    left: 10.w,
+                                    child: FloatingActionButton(
+                                        backgroundColor: AppColors.secondary,
+                                        child: Icon(
+                                          size: 40.sp,
+                                          Icons.cancel,
+                                          color: AppColors.bgWhite,
+                                        ),
+                                        onPressed: () {
+                                          filePickerProvider.clearFile();
+                                        }))
+                              ]),
                       ),
                     ),
                     SizedBox(
