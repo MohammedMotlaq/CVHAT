@@ -1,4 +1,5 @@
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/providers/auth_form_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_back_button.dart';
 import 'package:cvhat/widgets/custom_button.dart';
@@ -12,9 +13,8 @@ class ConfirmPasswordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    TextEditingController controller1 = TextEditingController();
-    return Consumer<UiProvider>(builder: (context, uiProvider, child) {
+    return Consumer2<UiProvider, AuthFormProvider>(
+        builder: (context, uiProvider, authFormProvider, child) {
       return Container(
         color: AppColors.bgWhite,
         child: Column(
@@ -35,7 +35,7 @@ class ConfirmPasswordWidget extends StatelessWidget {
               width: 309,
               height: 50,
               textInputAction: TextInputAction.done,
-              textEditingController: controller,
+              textEditingController: authFormProvider.passwordController,
               hintText: 'New Password',
               inputType: TextInputType.visiblePassword,
               obscure: true,
@@ -47,7 +47,7 @@ class ConfirmPasswordWidget extends StatelessWidget {
               width: 309,
               height: 50,
               textInputAction: TextInputAction.done,
-              textEditingController: controller1,
+              textEditingController: authFormProvider.confirmPasswordController,
               hintText: 'Confirm New Password',
               inputType: TextInputType.visiblePassword,
               obscure: true,

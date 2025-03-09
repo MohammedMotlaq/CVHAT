@@ -1,3 +1,4 @@
+import 'package:cvhat/providers/auth_form_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_back_button.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class ForgetPasswordWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller = TextEditingController();
-    return Consumer<UiProvider>(builder: (context, uiProvider, child) {
+    return Consumer2<UiProvider, AuthFormProvider>(
+        builder: (context, uiProvider, authFormProvider, child) {
       return Container(
         color: AppColors.bgWhite,
         child: Column(
@@ -35,7 +36,7 @@ class ForgetPasswordWidget extends StatelessWidget {
               width: 309,
               height: 50,
               textInputAction: TextInputAction.done,
-              textEditingController: controller,
+              textEditingController: authFormProvider.emailController,
               hintText: 'Email',
               inputType: TextInputType.emailAddress,
             ),
