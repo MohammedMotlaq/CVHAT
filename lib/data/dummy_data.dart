@@ -1,6 +1,17 @@
-import 'package:cvhat/models/review_details.dart';
-
 class DummyData {
+  static const List<Map<String, dynamic>> premiumOffers = [
+    {
+      'title': 'Annul',
+      'offer': 'First 30 days free - Then \$999/Year',
+      'is_best': true
+    },
+    {
+      'title': 'Monthly',
+      'offer': 'First 7 days free - Then \$99/Month',
+      'is_best': false
+    }
+  ];
+
   static const List<Map<String, dynamic>> aiReviews = [
     {
       "id": "1241234",

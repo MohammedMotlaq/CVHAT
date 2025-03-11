@@ -9,11 +9,10 @@ class RecentReviewsList extends StatelessWidget {
   final bool scrollable;
 
   const RecentReviewsList(
-      {Key? key,
+      {super.key,
       required this.recentReviews,
-      this.height = 500,
-      this.scrollable = true})
-      : super(key: key);
+      this.height = 499,
+      this.scrollable = true});
 
   @override
   Widget build(BuildContext context) {
