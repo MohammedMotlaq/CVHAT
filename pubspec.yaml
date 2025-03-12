@@ -84,9 +84,11 @@ flutter:
         - asset: assets/fonts/Inter-VariableFont_opsz,wght.ttf
         - asset: assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf
           style: italic
-  #    - family: BellTM
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/PlayfairDisplay-VariableFont_wght.ttf
+  #    - family: TrajanPro
   #      fonts:
-  #        - asset: assets/fonts/BellMT.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

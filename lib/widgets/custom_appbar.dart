@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,14 +21,19 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           radius: 35.r,
           backgroundColor: AppColors.bgWhite,
           child: Text(
-            userName[0],
-            style: TextStyle(color: AppColors.textPrimary, fontSize: 24.sp),
+            userName[0].toUpperCase(),
+            style: TextStyle(
+                color: AppColors.textPrimary,
+                fontSize: 24.sp,
+                fontFamily: 'PlayfairDisplay',
+                fontWeight: FontWeight.bold),
           ),
         ),
         title: Text(
-          "CVHAT",
+          "C V H A T",
           style: TextStyle(
               fontWeight: FontWeight.bold,
+              fontFamily: 'PlayfairDisplay',
               color: AppColors.textWhite,
               fontSize: 32.sp),
         ),
@@ -37,7 +43,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
             onPressed: () {
               AppRouter.pushWidget(const ProfileScreen());
             },
-            icon: Icon(Icons.settings, size: 40.r, color: AppColors.bgWhite),
+            icon: Image.asset(AppIcons.menu, width: 32.w, height: 32.h),
           ),
         ],
       ),
