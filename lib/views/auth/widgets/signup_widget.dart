@@ -46,7 +46,6 @@ class SignupWidget extends StatelessWidget {
                     textEditingController: authProvider.firstNameController,
                     hintText: 'First Name',
                     inputType: TextInputType.text,
-                    onChangedCallback: (_) => authProvider.validateFirstName(),
                   ),
                   CustomTextField(
                     width: 145,
@@ -55,7 +54,6 @@ class SignupWidget extends StatelessWidget {
                     textEditingController: authProvider.lastNameController,
                     hintText: 'Last Name',
                     inputType: TextInputType.text,
-                    onChangedCallback: authProvider.validateLastName,
                   ),
                 ],
               ),
@@ -69,7 +67,6 @@ class SignupWidget extends StatelessWidget {
                 textEditingController: authProvider.emailController,
                 hintText: 'Email',
                 inputType: TextInputType.emailAddress,
-                onChangedCallback: authProvider.validateEmail,
               ),
               SizedBox(height: 20.h),
 
@@ -82,7 +79,6 @@ class SignupWidget extends StatelessWidget {
                 hintText: 'Password',
                 inputType: TextInputType.visiblePassword,
                 obscure: authProvider.isPasswordObscure,
-                onChangedCallback: authProvider.validatePassword,
                 suffixIcon: IconButton(
                   icon: Icon(authProvider.isPasswordObscure
                       ? Icons.visibility_off
@@ -101,7 +97,6 @@ class SignupWidget extends StatelessWidget {
                 hintText: 'Confirm Password',
                 inputType: TextInputType.visiblePassword,
                 obscure: authProvider.isConfirmPasswordObscure,
-                onChangedCallback: authProvider.validateConfirmPassword,
                 suffixIcon: IconButton(
                   icon: Icon(authProvider.isConfirmPasswordObscure
                       ? Icons.visibility_off
@@ -116,7 +111,7 @@ class SignupWidget extends StatelessWidget {
                 width: 248,
                 title: 'Signup',
                 onTap: () {
-                  if (authProvider.validateForm()) {
+                  if (authProvider.validateSignUpForm()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Signup Successful!')),
                     );
