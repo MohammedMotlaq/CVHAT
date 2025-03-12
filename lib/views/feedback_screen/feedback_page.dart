@@ -12,6 +12,7 @@ class FeedbackPage extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        backgroundColor: AppColors.bgWhite,
         appBar: const FeedbackAppBar(),
         body: SingleChildScrollView(
           child: Container(
@@ -45,7 +46,7 @@ class FeedbackPage extends StatelessWidget {
                   "Comments on your resume:",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+                      color: AppColors.textSecondary,
                       fontSize: 22.sp),
                 ),
                 SizedBox(
@@ -59,7 +60,7 @@ class FeedbackPage extends StatelessWidget {
                   itemCount: 10,
                   itemBuilder: (context, index) {
                     return const FeedbackComment(
-                      title: "title",
+                      title: "Design Feedback Comments",
                       comment:
                           "This is a placeholder text,This is a placeholder text.  This is a placeholder textTitle of Refinment",
                     );
