@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AuthFormProvider extends ChangeNotifier {
+  AuthFormProvider._();
+
+  static AuthFormProvider authFormProvider = AuthFormProvider._();
   bool isPasswordObscure = true;
   bool isConfirmPasswordObscure = true;
   final TextEditingController firstNameController = TextEditingController();
@@ -69,7 +72,13 @@ class AuthFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool validateForm() {
+  bool validateLoginForm() {
+    validateEmail();
+    validatePassword();
+    return _emailError == null && _passwordError == null;
+  }
+
+  bool validateSignUpForm() {
     validateFirstName();
     validateLastName();
     validateEmail();
