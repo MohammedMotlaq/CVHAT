@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
+  CustomButton(
       {super.key,
       required this.height,
       required this.width,
       required this.title,
+      this.fontSize,
       required this.onTap});
 
   final double width;
   final double height;
   final String title;
+  double? fontSize;
   final Function onTap;
 
   @override
@@ -30,7 +32,7 @@ class CustomButton extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-                fontSize: 24.sp,
+                fontSize: fontSize == null ? 24.sp : fontSize?.sp,
                 fontWeight: FontWeight.bold,
                 color: AppColors.textWhite),
           )),

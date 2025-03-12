@@ -1,6 +1,7 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
+import 'package:cvhat/views/premium_screen/premium_screen.dart';
 import 'package:cvhat/widgets/custom_app_bar.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/recent_review_card.dart';
@@ -78,12 +79,16 @@ class ProfileScreen extends StatelessWidget {
                                 height: 43,
                                 width: 136,
                                 title: "Edit Profile",
+                                fontSize: 16,
                                 onTap: () {}),
                             CustomButton(
                                 height: 43,
                                 width: 136,
                                 title: "Premium",
-                                onTap: () {}),
+                                fontSize: 16,
+                                onTap: () {
+                                  AppRouter.pushWidget(const PremiumScreen());
+                                }),
                           ],
                         ),
                         SizedBox(

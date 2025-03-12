@@ -2,6 +2,7 @@ C/C++ Structured Log_
 ]
 [C:\Enviroments\Flutter\flutter\packages\flutter_tools\gradle\src\main\groovy\CMakeLists.txtC
 A
+<<<<<<< HEAD
 ?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	‰ÀËØ2§ á•ÉÐ×2i
 g
 eC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\additional_project_files.txt	‰ÀËØ2 ö¿ËØ2f
@@ -26,3 +27,29 @@ hC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\metada
 [C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\prefab_config.json	‹ÀËØ2( ÀËØ2d
 b
 `C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\symbol_folder_index.txt	‹ÀËØ2W ‚ÀËØ2
+=======
+?com.android.build.gradle.internal.cxx.io.EncodedFileFingerPrint	ªã£œØ2§ á•ÉÐ×2i
+g
+eC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\additional_project_files.txt	ªã£œØ2 ’ã£œØ2f
+d
+bC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\android_gradle_build.json	ªã£œØ2Ê šã£œØ2k
+i
+gC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\android_gradle_build_mini.json	ªã£œØ2Ÿ ¢ã£œØ2X
+V
+TC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\build.ninja	ªã£œØ2 Ù »â£œØ2\
+Z
+XC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\build.ninja.txt	ªã£œØ2a
+_
+]C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\build_file_index.txt	ªã£œØ2[ ¢ã£œØ2b
+`
+^C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\compile_commands.json	ªã£œØ2	f
+d
+bC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\compile_commands.json.bin	ªã£œØ2
+l
+j
+hC:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\metadata_generation_command.txt	ªã£œØ2Í ¢ã£œØ2_
+]
+[C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\prefab_config.json	ªã£œØ2( ¢ã£œØ2d
+b
+`C:\Users\Mohammed\IdeaProjects\cvhat\android\app\.cxx\Debug\6c4b3m67\x86\symbol_folder_index.txt	ªã£œØ2W ¢ã£œØ2
+>>>>>>> 626b30a17d0fcc266aa87eea795a28e41bbdba88
