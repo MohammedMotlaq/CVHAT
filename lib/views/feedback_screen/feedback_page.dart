@@ -72,6 +72,17 @@ class FeedbackPage extends StatelessWidget {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          shape: const CircleBorder(),
+          backgroundColor: AppColors.secondary_3,
+          tooltip: "Save",
+          onPressed: () {},
+          child: Icon(
+            Icons.bookmark_border_rounded,
+            size: 24.w,
+            color: AppColors.bgWhite,
+          ),
+        ),
       ),
     );
   }
