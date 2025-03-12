@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 40.h,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ReviewCard(label: "AI Reviews", value: "7"),
@@ -58,15 +58,30 @@ class HomePage extends StatelessWidget {
                             fontSize: 20.sp, color: AppColors.textSecondary),
                       ),
                       TextButton(
+                          style: TextButton.styleFrom(
+                              foregroundColor: AppColors.textSecondary,
+                              padding: EdgeInsets.zero),
                           onPressed: () {
                             AppRouter.pushWidget(const ReviewsHistory());
                           },
-                          child: Text(
-                            "View All >",
-                            style: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.normal,
-                                color: AppColors.textSecondary),
+                          child: Row(
+                            children: [
+                              Text(
+                                "View All",
+                                style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.normal,
+                                    color: AppColors.textSecondary),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 24.w,
+                                color: AppColors.secondary,
+                              )
+                            ],
                           ))
                     ],
                   ),
