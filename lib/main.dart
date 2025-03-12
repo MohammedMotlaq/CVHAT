@@ -1,4 +1,5 @@
 import 'package:cvhat/providers.dart';
+import 'package:cvhat/services/local_storage_service.dart';
 import 'package:cvhat/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +8,9 @@ import 'package:provider/provider.dart';
 import 'app_router.dart';
 import 'core/resources/app_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await LocalStorageService.localStorageService.initS();
   runApp(const MyApp());
 }
 

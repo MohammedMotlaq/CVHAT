@@ -39,6 +39,9 @@ dependencies:
   provider: ^6.1.2
   file_picker: ^9.0.2
   syncfusion_flutter_pdfviewer: ^28.2.9
+  dio: ^5.8.0+1
+  shared_preferences: ^2.5.2
+  awesome_snackbar_content: ^0.1.1
 
 
 dev_dependencies:

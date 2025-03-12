@@ -1,6 +1,7 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/auth_form_provider.dart';
+import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/home_screen/home_page.dart';
 import 'package:cvhat/widgets/custom_button.dart';
@@ -14,8 +15,8 @@ class LoginWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<UiProvider, AuthFormProvider>(
-        builder: (context, uiProvider, authFormProvider, child) {
+    return Consumer3<UiProvider, AuthFormProvider, AuthProvider>(
+        builder: (context, uiProvider, authFormProvider, authProvider, child) {
       return Container(
         color: AppColors.bgWhite,
         child: Column(
@@ -74,8 +75,8 @@ class LoginWidget extends StatelessWidget {
                         color: AppColors.textPrimary,
                         fontWeight: FontWeight.normal)),
                 TextButton(
-                  onPressed: () {
-                    uiProvider.setAuthState(AuthState.forgetPassword);
+                  onPressed: ()async {
+                    await  authProvider.loadUser();
                   },
                   child: Text(
                     "Reset here",
@@ -93,7 +94,7 @@ class LoginWidget extends StatelessWidget {
               width: 248,
               title: 'Login',
               onTap: () {
-                AppRouter.pushAndRemoveUntil(const HomePage());
+                authProvider.login();
               },
             ),
             SizedBox(height: 20.h),

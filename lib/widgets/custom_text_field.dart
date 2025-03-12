@@ -13,7 +13,6 @@ class CustomTextField extends StatelessWidget {
       required this.textEditingController,
       required this.hintText,
       required this.inputType,
-      this.onChangedCallback,
       this.suffixIcon});
 
   final double width;
@@ -23,7 +22,6 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final bool? obscure;
   final TextInputAction textInputAction;
-  final Function? onChangedCallback;
   final IconButton? suffixIcon;
 
   @override
@@ -36,9 +34,6 @@ class CustomTextField extends StatelessWidget {
           keyboardType: inputType,
           obscureText: obscure ?? false,
           textInputAction: textInputAction,
-          onChanged: (e) {
-            onChangedCallback!(e);
-          },
           decoration: InputDecoration(
               suffixIcon: suffixIcon,
               contentPadding:
