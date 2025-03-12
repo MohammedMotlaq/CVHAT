@@ -5,6 +5,8 @@ import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../core/resources/app_icons.dart';
+
 class RecentReviewCard extends StatelessWidget {
   final ReviewDetails review;
 
@@ -21,13 +23,24 @@ class RecentReviewCard extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
         decoration: BoxDecoration(
             color: AppColors.secondary,
-            borderRadius: BorderRadius.circular(20.r)),
+            borderRadius: BorderRadius.circular(16.r)),
         child: Row(
           children: [
             Container(
               width: 66.w,
               height: 87.h,
-              color: AppColors.bgWhite,
+              decoration: BoxDecoration(
+                color: AppColors.bgWhite,
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.r),
+                //TODO: Add image
+                child: Image.asset(
+                  AppIcons.cv,
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
             SizedBox(
               width: 10.w,
@@ -40,12 +53,17 @@ class RecentReviewCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        review.title,
-                        style: TextStyle(
-                            fontSize: 20.sp,
-                            color: AppColors.textWhite,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                        width: 215.w,
+                        child: Text(
+                          review.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 20.sp,
+                              color: AppColors.textWhite,
+                              fontWeight: FontWeight.normal),
+                        ),
                       ),
                       CircleAvatar(
                         backgroundColor: AppColors.bgWhite,
@@ -63,12 +81,17 @@ class RecentReviewCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        review.fileName,
-                        style: TextStyle(
-                            fontSize: 13.sp,
-                            color: AppColors.textWhite,
-                            fontWeight: FontWeight.w300),
+                      SizedBox(
+                        width: 151.w,
+                        child: Text(
+                          review.fileName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              color: AppColors.textWhite,
+                              fontWeight: FontWeight.w300),
+                        ),
                       ),
                       Text(
                         review.uploadDate,
