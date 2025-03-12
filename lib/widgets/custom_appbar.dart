@@ -16,6 +16,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 18.w),
       child: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
         leading: CircleAvatar(
           radius: 35.r,
