@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 import 'app_router.dart';
+import 'core/resources/app_colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
               navigatorKey: AppRouter.navKey,
               theme: ThemeData(
                 fontFamily: 'Inter',
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
                 useMaterial3: true,
               ),
               debugShowCheckedModeBanner: false,
