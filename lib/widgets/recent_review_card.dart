@@ -20,10 +20,19 @@ class RecentReviewCard extends StatelessWidget {
       },
       child: Container(
         height: 120.h,
+        margin: EdgeInsets.symmetric(horizontal: 18.w),
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
         decoration: BoxDecoration(
             color: AppColors.secondary,
-            borderRadius: BorderRadius.circular(16.r)),
+            borderRadius: BorderRadius.circular(16.r),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.secondary.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: const Offset(0, 3),
+              )
+            ]),
         child: Row(
           children: [
             Container(

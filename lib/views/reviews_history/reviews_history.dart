@@ -15,13 +15,11 @@ class ReviewsHistory extends StatelessWidget {
         .map((json) => ReviewDetails.fromJson(json))
         .toList();
     return Scaffold(
-      appBar: HistoryAppBar(),
-      body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18.w),
-          child: RecentReviewsList(
-            recentReviews: AllHistory,
-            height: 900,
-          )),
+      appBar: const HistoryAppBar(),
+      body: RecentReviewsList(
+        recentReviews: AllHistory,
+        height: 900,
+      ),
     );
   }
 }

@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppColors.secondary,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(70.h),
-          child: const CustomAppbar(userName: "userName")),
+          child: const CustomAppbar(userName: "Mohammed")),
       body: Stack(
         children: [
           Container(
@@ -33,57 +33,62 @@ class HomePage extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.r),
                       topRight: Radius.circular(30.r))),
-              padding: EdgeInsets.symmetric(horizontal: 18.w),
               child: Column(
                 children: [
                   SizedBox(
                     height: 40.h,
                   ),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ReviewCard(label: "AI Reviews", value: "7"),
-                      ReviewCard(label: "Recruiter Feedback", value: "7"),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 18.w),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ReviewCard(label: "AI Reviews", value: "7"),
+                        ReviewCard(label: "Recruiter Feedback", value: "7"),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 15.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Recents",
-                        style: TextStyle(
-                            fontSize: 20.sp, color: AppColors.textSecondary),
-                      ),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                              foregroundColor: AppColors.textSecondary,
-                              padding: EdgeInsets.zero),
-                          onPressed: () {
-                            AppRouter.pushWidget(const ReviewsHistory());
-                          },
-                          child: Row(
-                            children: [
-                              Text(
-                                "View All",
-                                style: TextStyle(
-                                    fontSize: 20.sp,
-                                    fontWeight: FontWeight.normal,
-                                    color: AppColors.textSecondary),
-                              ),
-                              SizedBox(
-                                width: 5.w,
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                size: 24.w,
-                                color: AppColors.secondary,
-                              )
-                            ],
-                          ))
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 18.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Recents",
+                          style: TextStyle(
+                              fontSize: 20.sp, color: AppColors.textSecondary),
+                        ),
+                        TextButton(
+                            style: TextButton.styleFrom(
+                                foregroundColor: AppColors.textSecondary,
+                                padding: EdgeInsets.zero),
+                            onPressed: () {
+                              AppRouter.pushWidget(const ReviewsHistory());
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "View All",
+                                  style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.normal,
+                                      color: AppColors.textSecondary),
+                                ),
+                                SizedBox(
+                                  width: 5.w,
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 24.w,
+                                  color: AppColors.secondary,
+                                )
+                              ],
+                            ))
+                      ],
+                    ),
                   ),
                   RecentReviewsList(recentReviews: recents, scrollable: false),
                 ],
