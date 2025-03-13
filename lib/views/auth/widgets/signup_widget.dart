@@ -1,5 +1,6 @@
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/auth_form_provider.dart';
+import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_button.dart';
 import 'package:cvhat/widgets/custom_text_field.dart';
@@ -12,8 +13,8 @@ class SignupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AuthFormProvider, UiProvider>(
-      builder: (context, authProvider, uiProvider, child) {
+    return Consumer3<AuthFormProvider, UiProvider, AuthProvider>(
+      builder: (context, authFormProvider, uiProvider, authProvider, child) {
         return Container(
           color: AppColors.bgWhite,
           child: Column(
@@ -43,7 +44,7 @@ class SignupWidget extends StatelessWidget {
                     width: 145,
                     height: 50,
                     textInputAction: TextInputAction.next,
-                    textEditingController: authProvider.firstNameController,
+                    textEditingController: authFormProvider.firstNameController,
                     hintText: 'First Name',
                     inputType: TextInputType.text,
                   ),
@@ -51,7 +52,7 @@ class SignupWidget extends StatelessWidget {
                     width: 145,
                     height: 50,
                     textInputAction: TextInputAction.next,
-                    textEditingController: authProvider.lastNameController,
+                    textEditingController: authFormProvider.lastNameController,
                     hintText: 'Last Name',
                     inputType: TextInputType.text,
                   ),
@@ -64,7 +65,7 @@ class SignupWidget extends StatelessWidget {
                 width: 309,
                 height: 50,
                 textInputAction: TextInputAction.next,
-                textEditingController: authProvider.emailController,
+                textEditingController: authFormProvider.emailController,
                 hintText: 'Email',
                 inputType: TextInputType.emailAddress,
               ),
@@ -75,15 +76,15 @@ class SignupWidget extends StatelessWidget {
                 width: 309,
                 height: 50,
                 textInputAction: TextInputAction.next,
-                textEditingController: authProvider.passwordController,
+                textEditingController: authFormProvider.passwordController,
                 hintText: 'Password',
                 inputType: TextInputType.visiblePassword,
-                obscure: authProvider.isPasswordObscure,
+                obscure: authFormProvider.isPasswordObscure,
                 suffixIcon: IconButton(
-                  icon: Icon(authProvider.isPasswordObscure
+                  icon: Icon(authFormProvider.isPasswordObscure
                       ? Icons.visibility_off
                       : Icons.visibility),
-                  onPressed: authProvider.togglePasswordVisibility,
+                  onPressed: authFormProvider.togglePasswordVisibility,
                 ),
               ),
               SizedBox(height: 20.h),
@@ -93,15 +94,16 @@ class SignupWidget extends StatelessWidget {
                 width: 309,
                 height: 50,
                 textInputAction: TextInputAction.done,
-                textEditingController: authProvider.confirmPasswordController,
+                textEditingController:
+                    authFormProvider.confirmPasswordController,
                 hintText: 'Confirm Password',
                 inputType: TextInputType.visiblePassword,
-                obscure: authProvider.isConfirmPasswordObscure,
+                obscure: authFormProvider.isConfirmPasswordObscure,
                 suffixIcon: IconButton(
-                  icon: Icon(authProvider.isConfirmPasswordObscure
+                  icon: Icon(authFormProvider.isConfirmPasswordObscure
                       ? Icons.visibility_off
                       : Icons.visibility),
-                  onPressed: authProvider.toggleConfirmPasswordVisibility,
+                  onPressed: authFormProvider.toggleConfirmPasswordVisibility,
                 ),
               ),
               SizedBox(height: 20.h),
@@ -110,12 +112,8 @@ class SignupWidget extends StatelessWidget {
                 height: 55,
                 width: 248,
                 title: 'Signup',
-                onTap: () {
-                  if (authProvider.validateSignUpForm()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Signup Successful!')),
-                    );
-                  }
+                onTap: () async {
+                  await authProvider.signUp();
                 },
               ),
               SizedBox(height: 20.h),
@@ -127,7 +125,7 @@ class SignupWidget extends StatelessWidget {
                     padding: EdgeInsets.zero,
                   ),
                   onPressed: () {
-                    authProvider.clearControllers();
+                    authFormProvider.clearControllers();
                     uiProvider.setAuthState(AuthState.login);
                   },
                   child: SizedBox(
