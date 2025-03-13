@@ -45,3 +45,4 @@ app.*.map.json
 
 # Android CMake build files
 android/app/.cxx/
+android/app/.cxx/Debug/
