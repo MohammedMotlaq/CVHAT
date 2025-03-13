@@ -1,6 +1,6 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/providers/auth_form_provider.dart';
+import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/services/local_storage_service.dart';
 import 'package:cvhat/views/auth/register_screen.dart';
 import 'package:cvhat/views/home_screen/home_page.dart';
@@ -22,25 +22,28 @@ class AuthProvider extends ChangeNotifier {
   Future login() async {
     isLoading = true;
     notifyListeners();
-    String email = authFormProvider.emailController.text;
-    String password = authFormProvider.passwordController.text;
+
     if (!authFormProvider.validateLoginForm()) {
-      List<String> errors = [];
-      if (authFormProvider.emailError != null) {
-        errors.add(authFormProvider.emailError!);
+      String emailError = authFormProvider.emailError;
+      String passError = authFormProvider.passwordError;
+      if (emailError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", emailError, ToastificationType.error);
       }
-      if (authFormProvider.passwordError != null) {
-        errors.add(authFormProvider.passwordError!);
+      if (passError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", passError, ToastificationType.error);
       }
-      error = error = errors.join("\n");
-      AppRouter.awesomeSnackBar("Error", error, ContentType.failure);
+      isLoading = false;
+      notifyListeners();
       return;
     }
 
     try {
+      String email = authFormProvider.emailController.text;
+      String password = authFormProvider.passwordController.text;
       final responseData = await _authService.login(email, password);
 
-      // Extract user data from response
       final userData = responseData["data"];
       user = User.fromJson(userData);
 
@@ -53,10 +56,14 @@ class AuthProvider extends ChangeNotifier {
         lastName: user.lastName,
         email: user.email,
       );
-      AppRouter.awesomeSnackBar("Success", message, ContentType.success);
+      AppRouter.pushWithReplacement(const HomePage());
+      AppRouter.toastificationSnackBar(
+          "Success", message, ToastificationType.success);
+      authFormProvider.clearControllers();
     } catch (e) {
-      error = e.toString(); // Clean exception message
-      AppRouter.awesomeSnackBar("Error", error, ContentType.failure);
+      error = e.toString().split(":")[1]; // Clean exception message
+      AppRouter.toastificationSnackBar(
+          "Error", error, ToastificationType.error);
     }
 
     isLoading = false;
@@ -85,40 +92,38 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future signUp() async {
-    isLoading = true;
-    notifyListeners();
-    String firstName = authFormProvider.firstNameController.text;
-    String lastName = authFormProvider.lastNameController.text;
-    String email = authFormProvider.emailController.text;
-    String password = authFormProvider.passwordController.text;
-    String confirmPassword = authFormProvider.confirmPasswordController.text;
-
+  Future<bool> signUp() async {
     if (!authFormProvider.validateSignUpForm()) {
-      if (authFormProvider.firstNameError != null) {
+      if (authFormProvider.firstNameError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", authFormProvider.firstNameError, ToastificationType.error);
+      }
+      if (authFormProvider.lastNameError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", authFormProvider.lastNameError, ToastificationType.error);
+      }
+      if (authFormProvider.emailError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", authFormProvider.emailError, ToastificationType.error);
+      }
+      if (authFormProvider.passwordError.isNotEmpty) {
+        AppRouter.toastificationSnackBar(
+            "Error", authFormProvider.passwordError, ToastificationType.error);
+      }
+      if (authFormProvider.confirmPasswordError.isNotEmpty) {
         AppRouter.toastificationSnackBar("Error",
-            authFormProvider.firstNameError!, ToastificationType.error);
+            authFormProvider.confirmPasswordError, ToastificationType.error);
       }
-      if (authFormProvider.lastNameError != null) {
-        AppRouter.toastificationSnackBar(
-            "Error", authFormProvider.lastNameError!, ToastificationType.error);
-      }
-      if (authFormProvider.emailError != null) {
-        AppRouter.toastificationSnackBar(
-            "Error", authFormProvider.emailError!, ToastificationType.error);
-      }
-      if (authFormProvider.passwordError != null) {
-        AppRouter.toastificationSnackBar(
-            "Error", authFormProvider.passwordError!, ToastificationType.error);
-      }
-      if (authFormProvider.confirmPasswordError != null) {
-        AppRouter.toastificationSnackBar("Error",
-            authFormProvider.confirmPasswordError!, ToastificationType.error);
-      }
-
-      return;
+      return false;
     }
+
     try {
+      isLoading = true;
+      notifyListeners();
+      String firstName = authFormProvider.firstNameController.text;
+      String lastName = authFormProvider.lastNameController.text;
+      String email = authFormProvider.emailController.text;
+      String password = authFormProvider.passwordController.text;
       final responseMessage = await _authService.signUp(
         firstName,
         lastName,
@@ -126,20 +131,23 @@ class AuthProvider extends ChangeNotifier {
         password,
       );
 
-      message = responseMessage["message"].isNotEmpty == true
-          ? responseMessage["message"][0]
+      message = responseMessage.isNotEmpty == true
+          ? responseMessage
           : "Sign-up successful";
 
       AppRouter.toastificationSnackBar(
           "Success", message, ToastificationType.success);
-      AppRouter.pushWithReplacement(const HomePage());
+      isLoading = false;
+      notifyListeners();
+      authFormProvider.clearControllers();
+      return true;
     } catch (e) {
       error = e.toString();
+      isLoading = false;
+      notifyListeners();
       AppRouter.toastificationSnackBar(
           "Error", error, ToastificationType.error);
     }
-
-    isLoading = false;
-    notifyListeners();
+    return false;
   }
 }
