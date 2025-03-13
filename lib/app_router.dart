@@ -1,5 +1,7 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:toastification/toastification.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> navKey = GlobalKey<NavigatorState>();
@@ -72,6 +74,21 @@ class AppRouter {
           contentType: contentType,
         ),
       ));
+  }
+
+  static toastificationSnackBar(
+      String title, String description, ToastificationType type) {
+    return toastification.show(
+        style: ToastificationStyle.minimal,
+        overlayState: navKey.currentState?.overlay,
+        primaryColor: AppColors.secondary,
+        title: Text(title, style: const TextStyle(color: AppColors.textBlack)),
+        description: RichText(
+            text: TextSpan(
+                text: description,
+                style: const TextStyle(color: AppColors.textBlack))),
+        autoCloseDuration: const Duration(seconds: 5),
+        type: type);
   }
 }
 
