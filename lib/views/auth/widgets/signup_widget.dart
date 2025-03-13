@@ -113,7 +113,9 @@ class SignupWidget extends StatelessWidget {
                 width: 248,
                 title: 'Signup',
                 onTap: () async {
-                  await authProvider.signUp();
+                  if (await authProvider.signUp()) {
+                    uiProvider.setAuthState(AuthState.login);
+                  }
                 },
               ),
               SizedBox(height: 20.h),
