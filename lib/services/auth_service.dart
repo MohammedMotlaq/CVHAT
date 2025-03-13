@@ -30,4 +30,31 @@ class AuthService {
       throw Exception("An unexpected error occurred.");
     }
   }
+
+  Future<dynamic> signUp(
+      String firstName, String lastName, String email, String password) async {
+    try {
+      Response response = await _dio.post(ApiEndPoints.userSignup,
+          data: {
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "password": password
+          },
+          options: Options(headers: {"Content-Type": "application/json"}));
+      if (response.statusCode == 200) {
+        return response.data["message"];
+      } else {
+        throw Exception(response.data["message"]);
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        return Future.error(e.response!.data["message"][0]);
+      } else {
+        throw Exception("Network error. Please try again.");
+      }
+    } catch (e) {
+      throw Exception("Something Went Wrong");
+    }
+  }
 }
