@@ -19,17 +19,11 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         backgroundColor: Colors.transparent,
-        leading: CircleAvatar(
-          radius: 35.r,
-          backgroundColor: AppColors.bgWhite,
-          child: Text(
-            userName[0].toUpperCase(),
-            style: TextStyle(
-                color: AppColors.textPrimary,
-                fontSize: 24.sp,
-                fontFamily: 'PlayfairDisplay',
-                fontWeight: FontWeight.bold),
-          ),
+        leading: IconButton(
+          onPressed: () {
+            AppRouter.pushWidget(const ProfileScreen());
+          },
+          icon: Image.asset(AppIcons.menu, width: 32.w, height: 32.h),
         ),
         title: Text(
           "C V H A T",
@@ -41,11 +35,17 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            onPressed: () {
-              AppRouter.pushWidget(const ProfileScreen());
-            },
-            icon: Image.asset(AppIcons.menu, width: 32.w, height: 32.h),
+          CircleAvatar(
+            radius: 35.r,
+            backgroundColor: AppColors.bgWhite,
+            child: Text(
+              userName[0].toUpperCase(),
+              style: TextStyle(
+                  color: AppColors.textPrimary,
+                  fontSize: 24.sp,
+                  fontFamily: 'PlayfairDisplay',
+                  fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),
