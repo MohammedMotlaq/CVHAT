@@ -6,6 +6,7 @@ import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/views/reviews_history/reviews_history.dart';
 import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
+import 'package:cvhat/views/drawer/app_drawer_widget.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,6 +25,7 @@ class HomePage extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(70.h),
           child: const CustomAppbar(userName: "Mohammed")),
+      drawer: const AppDrawerWidget(),
       body: Stack(
         children: [
           Container(

@@ -21,7 +21,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
-            AppRouter.pushWidget(const ProfileScreen());
+            //AppRouter.pushWidget(const ProfileScreen());
+            Scaffold.of(context).openDrawer();
           },
           icon: Image.asset(AppIcons.menu, width: 32.w, height: 32.h),
         ),
