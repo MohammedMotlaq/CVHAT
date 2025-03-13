@@ -13,61 +13,53 @@ class AuthFormProvider extends ChangeNotifier {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
-  String? _firstNameError;
-  String? _lastNameError;
-  String? _emailError;
-
-  String? _passwordError;
-
-  String? _confirmPasswordError;
-
-  String? get firstNameError => _firstNameError;
-
-  String? get lastNameError => _lastNameError;
-
-  String? get emailError => _emailError;
-
-  String? get passwordError => _passwordError;
-
-  String? get confirmPasswordError => _confirmPasswordError;
+  String firstNameError = "";
+  String lastNameError = "";
+  String emailError = "";
+  String passwordError = "";
+  String confirmPasswordError = "";
 
   void validateFirstName() {
-    _firstNameError =
-        firstNameController.text.isEmpty ? 'First name is required' : null;
+    firstNameError =
+        firstNameController.text.isEmpty ? 'First name is required' : "";
     notifyListeners();
   }
 
   void validateLastName() {
-    _lastNameError =
-        lastNameController.text.isEmpty ? 'Last name is required' : null;
+    lastNameError =
+        lastNameController.text.isEmpty ? 'Last name is required' : "";
     notifyListeners();
   }
 
   void validateEmail() {
     String email = emailController.text;
-    _emailError = email.isEmpty
+    emailError = email.isEmpty
         ? 'Email is required'
         : (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(email)
             ? 'Enter a valid email'
-            : null);
+            : "");
     notifyListeners();
   }
 
   void validatePassword() {
-    _passwordError = passwordController.text.length < 6
-        ? 'Password must be at least 6 characters'
-        : null;
+    if (passwordController.text.isEmpty) {
+      passwordError = "Password is required";
+    } else if (passwordController.text.length < 8) {
+      passwordError = "Password must be at least 8 characters";
+    } else {
+      passwordError = "";
+    }
     notifyListeners();
   }
 
   void validateConfirmPassword() {
     String confirmPassword = confirmPasswordController.text;
     if (confirmPassword.isEmpty) {
-      _confirmPasswordError = 'Confirm Password is required';
+      confirmPasswordError = 'Confirm Password is required';
     } else if (confirmPassword != passwordController.text) {
-      _confirmPasswordError = 'Passwords do not match';
+      confirmPasswordError = 'Passwords do not match';
     } else {
-      _confirmPasswordError = null;
+      confirmPasswordError = "";
     }
     notifyListeners();
   }
@@ -75,7 +67,7 @@ class AuthFormProvider extends ChangeNotifier {
   bool validateLoginForm() {
     validateEmail();
     validatePassword();
-    return _emailError == null && _passwordError == null;
+    return emailError.isEmpty && passwordError.isEmpty;
   }
 
   bool validateSignUpForm() {
@@ -85,11 +77,11 @@ class AuthFormProvider extends ChangeNotifier {
     validatePassword();
     validateConfirmPassword();
 
-    return _firstNameError == null &&
-        _lastNameError == null &&
-        _emailError == null &&
-        _passwordError == null &&
-        _confirmPasswordError == null;
+    return firstNameError.isEmpty &&
+        lastNameError.isEmpty &&
+        emailError.isEmpty &&
+        passwordError.isEmpty &&
+        confirmPasswordError.isEmpty;
   }
 
   void clearControllers() {
