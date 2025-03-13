@@ -5,7 +5,10 @@ class AuthService {
   AuthService._();
 
   static AuthService authService = AuthService._();
-  final Dio _dio = Dio();
+  final Dio _dio = Dio(BaseOptions(
+    connectTimeout: const Duration(seconds: 10),
+    receiveTimeout: const Duration(seconds: 10),
+  ));
 
   Future<dynamic> login(String email, String password) async {
     try {
@@ -43,13 +46,13 @@ class AuthService {
           },
           options: Options(headers: {"Content-Type": "application/json"}));
       if (response.statusCode == 200) {
-        return response.data["message"];
+        return response.data["message"][0];
       } else {
         throw Exception(response.data["message"]);
       }
     } on DioException catch (e) {
       if (e.response != null) {
-        return Future.error(e.response!.data["message"][0]);
+        throw Exception(e.response!.data["message"][0]);
       } else {
         throw Exception("Network error. Please try again.");
       }
