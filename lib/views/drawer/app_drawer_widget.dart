@@ -46,6 +46,7 @@ class AppDrawerWidget extends StatelessWidget {
                     icon: AppIcons.logout,
                     isSelected: false,
                     onTap: () async {
+                      print("test1");
                       await authProvider.logout();
                     }),
                 SizedBox(
