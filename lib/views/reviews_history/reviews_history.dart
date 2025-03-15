@@ -11,13 +11,13 @@ class ReviewsHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ReviewDetails> AllHistory = DummyData.aiReviews
+    final List<ReviewDetails> allHistory = DummyData.aiReviews
         .map((json) => ReviewDetails.fromJson(json))
         .toList();
     return Scaffold(
       appBar: const HistoryAppBar(),
       body: RecentReviewsList(
-        recentReviews: AllHistory,
+        recentReviews: allHistory,
         height: 900,
       ),
     );

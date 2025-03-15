@@ -9,14 +9,12 @@ class LoaderBlurScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned.fill(
       child: Stack(children: [
-        // Blur effect
         BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
           child: Container(
-            color: Colors.white.withOpacity(0.1), // Optional dimming
+            color: Colors.white.withValues(alpha: 0.1),
           ),
         ),
-        // Loading Indicator
         const Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,

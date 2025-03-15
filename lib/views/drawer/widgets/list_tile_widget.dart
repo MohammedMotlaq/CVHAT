@@ -21,7 +21,7 @@ class ListTileWidget extends StatelessWidget {
       width: 280.w,
       decoration: BoxDecoration(
         color: isSelected
-            ? AppColors.secondary.withOpacity(0.04)
+            ? AppColors.secondary.withValues(alpha: 0.04)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(25.r),
       ),

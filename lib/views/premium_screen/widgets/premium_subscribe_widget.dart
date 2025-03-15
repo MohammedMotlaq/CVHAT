@@ -17,7 +17,7 @@ class PremiumSubscribeWidget extends StatelessWidget {
         height: 90.h,
         padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
         decoration: BoxDecoration(
-          color: AppColors.secondary.withOpacity(0.1),
+          color: AppColors.secondary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16.r),
           border: premiumDetails.isBest
               ? Border.all(width: 2.w, color: AppColors.secondary)
