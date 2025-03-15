@@ -1,10 +1,10 @@
-import 'package:cvhat/models/review_details.dart';
+import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/widgets/recent_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecentReviewsList extends StatelessWidget {
-  final List<ReviewDetails> recentReviews;
+  final List<Review> recentReviews;
   final double height;
   final bool scrollable;
 

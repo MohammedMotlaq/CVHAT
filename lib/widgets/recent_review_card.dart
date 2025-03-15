@@ -1,6 +1,7 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/models/review_details.dart';
+import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/resources/app_icons.dart';
 
 class RecentReviewCard extends StatelessWidget {
-  final ReviewDetails review;
+  final Review review;
 
   const RecentReviewCard({super.key, required this.review});
 
@@ -45,9 +46,15 @@ class RecentReviewCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.r),
                 //TODO: Add image
-                child: Image.asset(
-                  AppIcons.cv,
+                child: Image.network(
+                  review.cv.coverImageUrlLow,
                   fit: BoxFit.fill,
+                  loadingBuilder: (context, child, isLoading) {
+                    return Image.asset(AppIcons.cv);
+                  },
+                  errorBuilder: (context, child, stackTrace) {
+                    return Image.asset(AppIcons.cv);
+                  },
                 ),
               ),
             ),
@@ -65,7 +72,7 @@ class RecentReviewCard extends StatelessWidget {
                       SizedBox(
                         width: 215.w,
                         child: Text(
-                          review.title,
+                          review.cv.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -93,7 +100,7 @@ class RecentReviewCard extends StatelessWidget {
                       SizedBox(
                         width: 151.w,
                         child: Text(
-                          review.fileName,
+                          review.cv.fileName,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -103,7 +110,7 @@ class RecentReviewCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        review.uploadDate,
+                        review.formattedDate,
                         style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.textWhite,
