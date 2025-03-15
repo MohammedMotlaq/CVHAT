@@ -60,4 +60,25 @@ class AuthService {
       throw Exception("Something Went Wrong");
     }
   }
+
+  Future<bool> logout(String userToken) async {
+    try {
+      Response response = await _dio.post(
+        ApiEndPoints.userLogin,
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "bearer $userToken"
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }
