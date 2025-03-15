@@ -26,7 +26,7 @@ class UserAccountDetails extends StatelessWidget {
       ),
       decoration: BoxDecoration(color: AppColors.secondary, boxShadow: [
         BoxShadow(
-          color: AppColors.secondary.withOpacity(0.3),
+          color: AppColors.secondary.withValues(alpha: 0.3),
           spreadRadius: 0.2,
           blurRadius: 10,
           offset: const Offset(0, 6),

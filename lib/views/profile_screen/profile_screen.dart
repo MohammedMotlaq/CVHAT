@@ -4,7 +4,6 @@ import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/premium_screen/premium_screen.dart';
 import 'package:cvhat/widgets/custom_app_bar.dart';
 import 'package:cvhat/widgets/custom_button.dart';
-import 'package:cvhat/widgets/recent_review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

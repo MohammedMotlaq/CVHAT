@@ -50,7 +50,7 @@ class PremiumScreen extends StatelessWidget {
               "Unlock all the power of this mobile tool and enjoy digital experience like never before!",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: AppColors.textSecondary.withOpacity(0.7),
+                  color: AppColors.textSecondary.withValues(alpha: 0.7),
                   fontWeight: FontWeight.normal,
                   fontSize: 14.sp),
             ),

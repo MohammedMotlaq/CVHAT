@@ -1,10 +1,7 @@
-import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/core/resources/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../views/profile_screen/profile_screen.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key, required this.userName});

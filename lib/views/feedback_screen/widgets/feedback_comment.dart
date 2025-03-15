@@ -36,7 +36,7 @@ class FeedbackComment extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
             decoration: BoxDecoration(
-              color: AppColors.bgGray.withOpacity(0.04),
+              color: AppColors.bgGray.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(16.r),
             ),
             child: Text(
