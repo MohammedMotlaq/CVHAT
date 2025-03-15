@@ -28,7 +28,7 @@ class RecentReviewCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.r),
             boxShadow: [
               BoxShadow(
-                color: AppColors.secondary.withOpacity(0.5),
+                color: AppColors.secondary.withValues(alpha: 0.5),
                 spreadRadius: 2,
                 blurRadius: 10,
                 offset: const Offset(0, 3),

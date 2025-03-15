@@ -2,7 +2,6 @@ import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/widgets/custom_back_button.dart';
 import 'package:cvhat/widgets/custom_button.dart';
-import 'package:cvhat/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

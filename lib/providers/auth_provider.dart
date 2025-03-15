@@ -87,8 +87,19 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    await localStorageService.clearUserData();
-    AppRouter.pushAndRemoveUntil(RegisterScreen());
+    isLoading = true;
+    notifyListeners();
+
+    String? userToken = await localStorageService.getUserToken();
+    bool res = await _authService.logout(userToken!);
+    if (res) {
+      AppRouter.pushAndRemoveUntil(const RegisterScreen());
+      user = null;
+      notifyListeners();
+      
+      await localStorageService.clearUserData();
+    }
+    isLoading = false;
     notifyListeners();
   }
 

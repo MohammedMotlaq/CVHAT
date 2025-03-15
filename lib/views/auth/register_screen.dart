@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/auth_provider.dart';
@@ -51,7 +49,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         borderRadius: BorderRadius.circular(14.r),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.bgBlack.withOpacity(0.2),
+                            color: AppColors.bgBlack.withValues(alpha: 0.2),
                             blurRadius: 10,
                             spreadRadius: 3,
                             offset: const Offset(4, 4),
@@ -64,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
             ),
-            if (authProvider.isLoading) LoaderBlurScreen()
+            if (authProvider.isLoading) const LoaderBlurScreen()
           ]));
     });
   }

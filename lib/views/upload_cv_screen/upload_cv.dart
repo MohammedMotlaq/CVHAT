@@ -53,8 +53,8 @@ class UploadCv extends StatelessWidget {
                                   height: 300.h,
                                   width: 300.w,
                                   decoration: BoxDecoration(
-                                    color:
-                                        AppColors.secondary.withOpacity(0.05),
+                                    color: AppColors.secondary
+                                        .withValues(alpha: 0.05),
                                     borderRadius: BorderRadius.circular(20.r),
                                   ),
                                   child: Column(
@@ -83,7 +83,7 @@ class UploadCv extends StatelessWidget {
                                     width: 300.w,
                                     decoration: BoxDecoration(
                                         color: AppColors.secondary
-                                            .withOpacity(0.05),
+                                            .withValues(alpha: 0.05),
                                         borderRadius:
                                             BorderRadius.circular(20.r),
                                         border: Border.all()),
