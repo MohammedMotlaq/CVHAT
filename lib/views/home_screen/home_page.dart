@@ -107,11 +107,10 @@ class HomePage extends StatelessWidget {
                   backgroundColor: AppColors.secondary_3,
                   elevation: 9,
                   shadowColor: Colors.black,
-                  minimumSize:
-                      Size(60.w, 60.h), // Circular button with 60 radius
+                  minimumSize: Size(60.w, 60.h),
                 ),
                 child: Icon(
-                  Icons.add_rounded, // Or any icon you want to use
+                  Icons.add_rounded,
                   size: 32.sp,
                   color: Colors.white,
                 ),

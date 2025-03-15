@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ],
               ),
             ),
-            if (authProvider.isLoading) LoaderBlurScreen()
+            if (authProvider.isLoading) const LoaderBlurScreen()
           ]));
     });
   }
