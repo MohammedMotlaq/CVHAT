@@ -22,6 +22,7 @@ class UploadCv extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: Scaffold(
+        backgroundColor: AppColors.bgWhite,
         appBar: const UploadCvAppBar(),
         body: SizedBox(
           width: 390.w,
