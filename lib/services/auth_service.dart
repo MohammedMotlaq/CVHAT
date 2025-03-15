@@ -64,12 +64,9 @@ class AuthService {
   Future<bool> logout(String userToken) async {
     try {
       Response response = await _dio.post(
-        ApiEndPoints.userLogin,
+        ApiEndPoints.userLogout,
         options: Options(
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "bearer $userToken"
-          },
+          headers: {"Authorization": "Bearer $userToken"},
         ),
       );
       if (response.statusCode == 200) {
@@ -77,6 +74,8 @@ class AuthService {
       } else {
         return false;
       }
+    } on DioException catch (e) {
+      return false;
     } catch (e) {
       return false;
     }
