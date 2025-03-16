@@ -12,6 +12,11 @@ class LogoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Image.asset(AppIcons.logo, width: width.w, height: height.h));
+        child: Image.asset(
+      AppIcons.logo,
+      width: width.w,
+      height: height.h,
+      fit: BoxFit.contain,
+    ));
   }
 }
