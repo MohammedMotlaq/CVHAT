@@ -20,6 +20,7 @@ class FeedBackProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     AppRouter.pushWidget(const FeedbackPage());
+
     try {
       String? userToken = await localStorageService.getUserToken();
       Review review =

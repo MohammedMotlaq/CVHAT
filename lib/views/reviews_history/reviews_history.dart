@@ -1,8 +1,5 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
-import 'package:cvhat/data/dummy_data.dart';
-import 'package:cvhat/models/review_details.dart';
-import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';

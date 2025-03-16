@@ -26,7 +26,7 @@ class Review {
       id: json['ID'],
       isAI: json['isAI'],
       isFavorite: json['isFavorite'],
-      createdAt: DateFormating.formattedDate(json['createdAt']),
+      createdAt: json['createdAt'],
       comments: json.containsKey('Comments')
           ? (json['Comments'] as List).map((c) => Comment.fromJson(c)).toList()
           : null,

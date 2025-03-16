@@ -50,7 +50,8 @@ class ReviewsService {
 
       if (response.statusCode == 200 && response.data["status"] == "success") {
         final reviewJson =
-            response.data["data"]["review"][0]; // Extract first review
+            response.data["data"]["review"]; // Extract first review
+        print(reviewJson.toString());
         return Review.fromJson(reviewJson);
       } else {
         throw Exception("Failed to fetch review");
