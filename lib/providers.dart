@@ -1,5 +1,6 @@
 import 'package:cvhat/providers/auth_form_provider.dart';
 import 'package:cvhat/providers/auth_provider.dart';
+import 'package:cvhat/providers/feedback_provider.dart';
 import 'package:cvhat/providers/file_picker_provider.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
@@ -23,6 +24,9 @@ class Providers {
     ),
     ChangeNotifierProvider<ReviewsProvider>(
       create: (_) => ReviewsProvider(),
+    ),
+    ChangeNotifierProvider<FeedBackProvider>(
+      create: (_) => FeedBackProvider(),
     ),
   ].toList();
 }
