@@ -56,7 +56,7 @@ class AuthProvider extends ChangeNotifier {
         lastName: user.lastName,
         email: user.email,
       );
-      AppRouter.pushWithReplacement(const HomePage());
+      AppRouter.pushWithReplacement(HomePage());
       AppRouter.toastificationSnackBar(
           "Success", message, ToastificationType.success);
       authFormProvider.clearControllers();
@@ -96,7 +96,7 @@ class AuthProvider extends ChangeNotifier {
       AppRouter.pushAndRemoveUntil(const RegisterScreen());
       user = null;
       notifyListeners();
-      
+
       await localStorageService.clearUserData();
     }
     isLoading = false;

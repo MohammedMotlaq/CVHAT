@@ -7,8 +7,10 @@ import '../services/reviews_service.dart';
 
 class ReviewsProvider extends ChangeNotifier {
   final ReviewsService _reviewsService = ReviewsService.reviewsService;
+
   List<Review> _reviews = [];
   List<Review> _recentReviews = [];
+
   final LocalStorageService localStorageService =
       LocalStorageService.localStorageService;
 
@@ -49,6 +51,7 @@ class ReviewsProvider extends ChangeNotifier {
       _recentReviews = await _reviewsService.fetchRecentReviews(userToken!);
     } catch (e) {
       _errorMessage = e.toString();
+      print(e.toString());
       AppRouter.toastificationSnackBar(
           "Error", _errorMessage!, ToastificationType.error);
     } finally {

@@ -24,7 +24,7 @@ class ReviewsService {
       );
 
       if (response.statusCode == 200) {
-        final List<dynamic> reviews = response.data["review"];
+        final List<dynamic> reviews = response.data["data"]["reviews"];
 
         if (reviews.isNotEmpty) {
           return reviews.map((json) => Review.fromJson(json)).toList();
