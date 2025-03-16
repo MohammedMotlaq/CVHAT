@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../data/dummy_data.dart';
-import '../../models/review_details.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

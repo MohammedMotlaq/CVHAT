@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/services/local_storage_service.dart';
+import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 import '../models/review_model.dart';
@@ -87,14 +88,13 @@ class ReviewsProvider extends ChangeNotifier {
     try {
       String? userToken = await localStorageService.getUserToken();
       final res = await _reviewsService.fetchReviewsCounts(userToken!);
-      print(res.toString());
+      _aiReviewsCount = res["_aiReviewsCount"];
+      _recruiterReviewsCount = res["recruiterReviewsCount"];
+      notifyListeners();
     } catch (e) {
       _errorMessage = e.toString();
       AppRouter.toastificationSnackBar(
           "Error", _errorMessage!, ToastificationType.error);
-    } finally {
-      _isLoading = false;
-      notifyListeners();
     }
   }
 }

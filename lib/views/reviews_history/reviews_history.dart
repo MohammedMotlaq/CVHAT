@@ -1,8 +1,5 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
-import 'package:cvhat/data/dummy_data.dart';
-import 'package:cvhat/models/review_details.dart';
-import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
@@ -25,9 +22,15 @@ class ReviewsHistory extends StatelessWidget {
         body: Consumer<ReviewsProvider>(
             builder: (context, reviewsProvider, child) {
           return reviewsProvider.isLoading
-              ? const Expanded(child: LoaderBlurScreen())
+              ? const SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: LoaderBlurScreen())
               : reviewsProvider.reviews.isEmpty
-                  ? const Expanded(child: LoaderBlurScreen())
+                  ? const SizedBox(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: LoaderBlurScreen())
                   : RecentReviewsList(
                       recentReviews: reviewsProvider.reviews,
                       height: 900,

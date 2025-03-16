@@ -128,7 +128,7 @@ class HomePage extends StatelessWidget {
                 right: 14.w,
                 child: ElevatedButton(
                   onPressed: () {
-                    AppRouter.pushWidget(const UploadCv());
+                    reviewsProvider.fetchRecentReviews();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
