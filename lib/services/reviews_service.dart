@@ -53,4 +53,28 @@ class ReviewsService {
   Future<List<Review>> fetchFavoriteReviews(String userToken) async {
     return await _fetchReviews(userToken, ApiEndPoints.getUserFavoriteReviews);
   }
+
+  Future<Map> fetchReviewsCounts(String userToken) async {
+    try {
+      final response = await _dio.get(
+        ApiEndPoints.getUserReviewsCount,
+        options: Options(
+          headers: {
+            "Authorization":
+                "Bearer $userToken", // Include userToken in headers
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return {
+          "aiReviewCount": response.data["data"]["aiReviewCount"],
+          "recruiterReviewCount": response.data["data"]["recruiterReviewCount"]
+        };
+      }
+      throw Exception("Failed to load Reviews Counts");
+    } catch (e) {
+      throw Exception("Error fetching reviews: $e");
+    }
+  }
 }
