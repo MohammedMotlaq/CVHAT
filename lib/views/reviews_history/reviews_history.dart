@@ -2,6 +2,7 @@ import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/data/dummy_data.dart';
 import 'package:cvhat/models/review_details.dart';
+import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,14 +12,13 @@ class ReviewsHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ReviewDetails> allHistory = DummyData.aiReviews
-        .map((json) => ReviewDetails.fromJson(json))
-        .toList();
+    final List<Review> AllHistory =
+        DummyData.aiReviews.map((json) => Review.fromJson(json)).toList();
     return Scaffold(
       backgroundColor: AppColors.bgWhite,
       appBar: const HistoryAppBar(),
       body: RecentReviewsList(
-        recentReviews: allHistory,
+        recentReviews: AllHistory,
         height: 900,
       ),
     );

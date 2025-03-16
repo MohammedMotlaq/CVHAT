@@ -32,7 +32,7 @@ class LocalStorageService {
   }
 
   Future<String?> getUserToken() async {
-    return _sharedPreferencesInstance!.getString("auth_token");
+    return _sharedPreferencesInstance!.getString('auth_token');
   }
 
   Future<void> clearUserData() async {

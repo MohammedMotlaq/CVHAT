@@ -14,178 +14,92 @@ class DummyData {
 
   static const List<Map<String, dynamic>> aiReviews = [
     {
-      "id": "1241234",
-      "title": "My Frontend CV",
-      "fileName": "frontendCv.pdf",
-      "uploadDate": "25 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {
-          "title": "Section Name",
-          "comment": "Specific improvement suggestion."
-        },
-        {
-          "title": "Another Section Name",
-          "comment": "Another piece of feedback."
-        },
-        {"title": "Design", "comment": "Use consistent font sizes."}
-      ]
+      "ID": 1,
+      "isAI": true,
+      "createdAt": "2025-03-13T08:18:32.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/32e21030-8da4-4c82-9458-5da318f4fe94/ad06ea24-844c-4eb6-9598-131be5226849.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241235",
-      "title": "Backend Resume",
-      "fileName": "backendResume.pdf",
-      "uploadDate": "26 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {
-          "title": "Skills",
-          "comment": "Consider adding more backend technologies."
-        },
-        {
-          "title": "Experience",
-          "comment": "Expand on past roles and achievements."
-        },
-        {"title": "Certifications", "comment": "List relevant certifications."},
-        {"title": "Projects", "comment": "Provide links to live demos."}
-      ]
+      "ID": 2,
+      "isAI": true,
+      "createdAt": "2025-03-13T08:50:14.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241236",
-      "title": "UI/UX Portfolio",
-      "fileName": "uiuxPortfolio.pdf",
-      "uploadDate": "27 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {
-          "title": "Design Consistency",
-          "comment": "Ensure uniform styling across pages."
-        },
-        {
-          "title": "Accessibility",
-          "comment": "Improve contrast for readability."
-        },
-        {"title": "Navigation", "comment": "Make the menu easier to use."}
-      ]
+      "ID": 3,
+      "isAI": true,
+      "createdAt": "2025-03-13T08:57:38.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241237",
-      "title": "Marketing Plan",
-      "fileName": "marketingPlan.pdf",
-      "uploadDate": "28 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {
-          "title": "Market Analysis",
-          "comment": "Provide more competitor insights."
-        },
-        {"title": "Strategy", "comment": "Clarify the target audience."},
-        {"title": "Budget", "comment": "Break down costs per campaign."},
-        {
-          "title": "Performance Metrics",
-          "comment": "Define KPIs for tracking success."
-        },
-        {
-          "title": "Social Media",
-          "comment": "Include strategies for online engagement."
-        }
-      ]
+      "ID": 4,
+      "isAI": true,
+      "createdAt": "2025-03-13T09:07:45.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241238",
-      "title": "Product Roadmap",
-      "fileName": "productRoadmap.pdf",
-      "uploadDate": "29 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {"title": "Milestones", "comment": "Add more detailed timelines."},
-        {"title": "Features", "comment": "List feature priorities clearly."},
-        {"title": "Development Phases", "comment": "Clarify the MVP scope."}
-      ]
+      "ID": 5,
+      "isAI": true,
+      "createdAt": "2025-03-13T09:10:57.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241239",
-      "title": "Data Science Report",
-      "fileName": "dataScienceReport.pdf",
-      "uploadDate": "30 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {
-          "title": "Data Visualization",
-          "comment": "Use more graphs for better clarity."
-        },
-        {
-          "title": "Conclusion",
-          "comment": "Summarize key findings more concisely."
-        },
-        {"title": "Dataset", "comment": "Provide sources for data collection."}
-      ]
+      "ID": 6,
+      "isAI": true,
+      "createdAt": "2025-03-13T09:12:10.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241240",
-      "title": "Business Proposal",
-      "fileName": "businessProposal.pdf",
-      "uploadDate": "31 Aug, 2025",
-      "type": "AI",
-      "comments": [
-        {"title": "Executive Summary", "comment": "Make it more compelling."},
-        {
-          "title": "Financials",
-          "comment": "Provide more detailed projections."
-        },
-        {
-          "title": "Market Potential",
-          "comment": "Back claims with relevant stats."
-        }
-      ]
+      "ID": 7,
+      "isAI": true,
+      "createdAt": "2025-03-13T09:15:00.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     },
     {
-      "id": "1241241",
-      "title": "Software Architecture",
-      "fileName": "softwareArchitecture.pdf",
-      "uploadDate": "01 Sep, 2025",
-      "type": "AI",
-      "comments": [
-        {"title": "Scalability", "comment": "Ensure system can handle growth."},
-        {"title": "Security", "comment": "Address potential vulnerabilities."},
-        {
-          "title": "Microservices",
-          "comment": "Consider breaking down components further."
-        }
-      ]
-    },
-    {
-      "id": "1241242",
-      "title": "Investment Pitch",
-      "fileName": "investmentPitch.pdf",
-      "uploadDate": "02 Sep, 2025",
-      "type": "AI",
-      "comments": [
-        {"title": "Pitch Deck", "comment": "Simplify slides for clarity."},
-        {"title": "Market Opportunity", "comment": "Provide more statistics."},
-        {
-          "title": "Investor Appeal",
-          "comment": "Highlight why this is a great opportunity."
-        },
-        {
-          "title": "Revenue Model",
-          "comment": "Clarify how the company will generate income."
-        }
-      ]
-    },
-    {
-      "id": "1241243",
-      "title": "Research Paper",
-      "fileName": "researchPaper.pdf",
-      "uploadDate": "03 Sep, 2025",
-      "type": "AI",
-      "comments": [
-        {"title": "Methodology", "comment": "Clarify the research approach."},
-        {"title": "References", "comment": "Ensure proper citation format."},
-        {"title": "Abstract", "comment": "Make the abstract more concise."},
-        {"title": "Findings", "comment": "Provide more detailed analysis."},
-        {"title": "Discussion", "comment": "Compare with previous research."}
-      ]
+      "ID": 8,
+      "isAI": true,
+      "createdAt": "2025-03-15T08:43:25.000Z",
+      "CV": {
+        "title": "Yusuf",
+        "coverImageUrlLow":
+            "https://cvhat.blob.core.windows.net/uploads/1/92bbdd78-a1e5-4e27-9de2-039cf3bcefaf/db5c3e1e-2597-4c65-9b7c-e79e30387321.png",
+        "fileName": "Yusuf's CV.pdf"
+      }
     }
   ];
 }

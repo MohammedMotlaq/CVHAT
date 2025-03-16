@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/premium_screen/premium_screen.dart';
 import 'package:cvhat/widgets/custom_app_bar.dart';
@@ -15,9 +16,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ReviewDetails> resents = DummyData.aiReviews
+    final List<Review> resents = DummyData.aiReviews
         .take(3)
-        .map((json) => ReviewDetails.fromJson(json))
+        .map((json) => Review.fromJson(json))
         .toList();
     return Scaffold(
       appBar: CustomAppBar(
