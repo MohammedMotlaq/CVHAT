@@ -11,7 +11,7 @@ class FeedbackAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.bgWhite,
       leading: IconButton(
           onPressed: () {
             AppRouter.popWidget();
@@ -25,6 +25,7 @@ class FeedbackAppBar extends StatelessWidget implements PreferredSizeWidget {
         "Feedback",
         style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontFamily: 'PlayfairDisplay',
             color: AppColors.secondary,
             fontSize: 32.sp),
       ),

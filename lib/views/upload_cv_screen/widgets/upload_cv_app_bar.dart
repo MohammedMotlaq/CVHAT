@@ -13,7 +13,7 @@ class UploadCvAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Consumer<FilePickerProvider>(
         builder: (context, filePickerProvider, child) {
       return AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.bgWhite,
         leading: IconButton(
             onPressed: () {
               AppRouter.popWidget();
@@ -28,6 +28,7 @@ class UploadCvAppBar extends StatelessWidget implements PreferredSizeWidget {
           "Upload CV",
           style: TextStyle(
               fontWeight: FontWeight.bold,
+              fontFamily: 'PlayfairDisplay',
               color: AppColors.secondary,
               fontSize: 32.sp),
         ),

@@ -1,9 +1,13 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/core/resources/app_icons.dart';
 import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/drawer/widgets/list_tile_widget.dart';
 import 'package:cvhat/views/drawer/widgets/user_account_details.dart';
+import 'package:cvhat/views/premium_screen/premium_screen.dart';
+import 'package:cvhat/views/profile_screen/profile_screen.dart';
+import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +38,21 @@ class AppDrawerWidget extends StatelessWidget {
                                 index == uiProvider.index ? true : false,
                             onTap: () {
                               uiProvider.setIndex(index);
+                              switch (uiProvider.index) {
+                                case 0:
+                                  AppRouter.popWidget();
+                                  break;
+                                case 1:
+                                  break;
+                                case 2:
+                                  AppRouter.popWidget();
+                                  AppRouter.pushWidget(const ProfileScreen());
+                                  break;
+                                case 3:
+                                  AppRouter.popWidget();
+                                  AppRouter.pushWidget(const PremiumScreen());
+                                  break;
+                              }
                             });
                       },
                       separatorBuilder: (context, index) =>
@@ -46,7 +65,7 @@ class AppDrawerWidget extends StatelessWidget {
                     icon: AppIcons.logout,
                     isSelected: false,
                     onTap: () async {
-                      print("test1");
+                      AppRouter.popWidget();
                       await authProvider.logout();
                     }),
                 SizedBox(

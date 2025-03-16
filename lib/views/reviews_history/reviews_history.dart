@@ -15,6 +15,7 @@ class ReviewsHistory extends StatelessWidget {
     final List<Review> AllHistory =
         DummyData.aiReviews.map((json) => Review.fromJson(json)).toList();
     return Scaffold(
+      backgroundColor: AppColors.bgWhite,
       appBar: const HistoryAppBar(),
       body: RecentReviewsList(
         recentReviews: AllHistory,
@@ -32,7 +33,7 @@ class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.bgWhite,
       leading: IconButton(
           onPressed: () {
             AppRouter.popWidget();
@@ -46,6 +47,7 @@ class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget {
         "History",
         style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontFamily: 'PlayfairDisplay',
             color: AppColors.secondary,
             fontSize: 32.sp),
       ),
