@@ -1,6 +1,5 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
-import 'package:cvhat/models/review_details.dart';
 import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +48,20 @@ class RecentReviewCard extends StatelessWidget {
                 child: Image.network(
                   review.cv.coverImageUrlLow,
                   fit: BoxFit.fill,
-                  loadingBuilder: (context, child, isLoading) {
-                    return Image.asset(AppIcons.cv);
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child; // Image fully loaded
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  (loadingProgress.expectedTotalBytes ?? 1)
+                              : null,
+                        ),
+                      );
+                    }
                   },
                   errorBuilder: (context, child, stackTrace) {
                     return Image.asset(AppIcons.cv);
