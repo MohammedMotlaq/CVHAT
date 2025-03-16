@@ -10,12 +10,17 @@ import 'package:cvhat/views/reviews_history/reviews_history.dart';
 import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
 import 'package:cvhat/views/drawer/app_drawer_widget.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
+import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key}) {
+    Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
+            listen: false)
+        .fetchRecentReviews();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,24 +99,27 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    reviewsProvider.recentReviews.isNotEmpty
-                        ? RecentReviewsList(
-                            recentReviews: reviewsProvider.recentReviews,
-                            scrollable: false)
-                        : Expanded(
-                            child: Center(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20.w),
-                              child: Text(
-                                "No Reviews Found, Start uploading now!",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 32.sp,
-                                    color: AppColors.textPrimary),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ))
+                    reviewsProvider.isLoading
+                        ? const Expanded(child: LoaderBlurScreen())
+                        : reviewsProvider.recentReviews.isNotEmpty
+                            ? RecentReviewsList(
+                                recentReviews: reviewsProvider.recentReviews,
+                                scrollable: false)
+                            : Expanded(
+                                child: Center(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 20.w),
+                                  child: Text(
+                                    "No Reviews Found, Start uploading now!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 32.sp,
+                                        color: AppColors.textPrimary),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ))
                   ],
                 )),
             Positioned(

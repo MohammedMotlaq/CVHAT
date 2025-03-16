@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       Future.delayed(const Duration(seconds: 2), () {
         if (authProvider.user != null) {
-          AppRouter.pushWithReplacement(const HomePage());
+          AppRouter.pushWithReplacement(HomePage());
         } else {
           AppRouter.pushWithReplacement(const RegisterScreen());
         }
