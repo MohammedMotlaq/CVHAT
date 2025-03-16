@@ -6,7 +6,7 @@ class CV {
   final String? url;
   final String? coverImageUrlHigh;
   final String? coverImageUrlLow;
-  final DateTime? createdAt;
+  final String? createdAt;
 
   CV({
     this.id,
@@ -28,9 +28,7 @@ class CV {
       url: json['url'],
       coverImageUrlHigh: json['coverImageUrlHigh'],
       coverImageUrlLow: json['coverImageUrlLow'],
-      createdAt: json.containsKey('createdAt')
-          ? DateTime.parse(json['createdAt'])
-          : null,
+      createdAt: json.containsKey('createdAt') ? json['createdAt'] : null,
     );
   }
 
@@ -43,7 +41,7 @@ class CV {
       if (url != null) 'url': url,
       if (coverImageUrlHigh != null) 'coverImageUrlHigh': coverImageUrlHigh,
       if (coverImageUrlLow != null) 'coverImageUrlLow': coverImageUrlLow,
-      if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
+      if (createdAt != null) 'createdAt': createdAt!,
     };
   }
 }

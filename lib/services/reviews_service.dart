@@ -1,5 +1,6 @@
 import 'package:cvhat/constants/api_endpoints.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import '../models/review_model.dart';
 
 class ReviewsService {
@@ -51,7 +52,6 @@ class ReviewsService {
       if (response.statusCode == 200 && response.data["status"] == "success") {
         final reviewJson =
             response.data["data"]["review"]; // Extract first review
-        print(reviewJson.toString());
         return Review.fromJson(reviewJson);
       } else {
         throw Exception("Failed to fetch review");
