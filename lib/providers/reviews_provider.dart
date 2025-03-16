@@ -25,7 +25,7 @@ class ReviewsProvider extends ChangeNotifier {
 
   String? get errorMessage => _errorMessage;
 
-  Future<void> fetchAllReviews(String? type) async {
+  Future<void> fetchAllReviews() async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();

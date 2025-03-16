@@ -75,7 +75,7 @@ class HomePage extends StatelessWidget {
                                   foregroundColor: AppColors.textSecondary,
                                   padding: EdgeInsets.zero),
                               onPressed: () {
-                                AppRouter.pushWidget(const ReviewsHistory());
+                                AppRouter.pushWidget(ReviewsHistory());
                               },
                               child: Row(
                                 children: [
