@@ -36,10 +36,28 @@ class ReviewsService {
     }
   }
 
-  Future<List<Review>> fetchReviewByID(
-      String userToken, String reviewID) async {
-    return await _fetchReviews(
-        userToken, " ${ApiEndPoints.getUserReviews}/$reviewID");
+  Future<Review> fetchReviewByID(String userToken, int reviewID) async {
+    try {
+      final response = await _dio.get(
+        "${ApiEndPoints.getUserReviews}/$reviewID",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+            // Include userToken in headers
+          },
+        ),
+      );
+
+      if (response.statusCode == 200 && response.data["status"] == "success") {
+        final reviewJson =
+            response.data["data"]["review"][0]; // Extract first review
+        return Review.fromJson(reviewJson);
+      } else {
+        throw Exception("Failed to fetch review");
+      }
+    } catch (error) {
+      throw Exception("Error fetching review: $error");
+    }
   }
 
   Future<List<Review>> fetchAllReviews(String userToken) async {
