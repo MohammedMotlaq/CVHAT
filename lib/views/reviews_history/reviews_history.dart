@@ -25,9 +25,15 @@ class ReviewsHistory extends StatelessWidget {
         body: Consumer<ReviewsProvider>(
             builder: (context, reviewsProvider, child) {
           return reviewsProvider.isLoading
-              ? const Expanded(child: LoaderBlurScreen())
+              ? const SizedBox(
+                  height: double.infinity,
+                  width: double.infinity,
+                  child: LoaderBlurScreen())
               : reviewsProvider.reviews.isEmpty
-                  ? const Expanded(child: LoaderBlurScreen())
+                  ? const SizedBox(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: LoaderBlurScreen())
                   : RecentReviewsList(
                       recentReviews: reviewsProvider.reviews,
                       height: 900,

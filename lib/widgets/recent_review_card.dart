@@ -47,7 +47,7 @@ class RecentReviewCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.r),
                 //TODO: Add image
                 child: Image.network(
-                  review.cv.coverImageUrlLow,
+                  review.cv.coverImageUrlLow!,
                   fit: BoxFit.fill,
                   loadingBuilder: (context, child, isLoading) {
                     return Image.asset(AppIcons.cv);
@@ -110,7 +110,7 @@ class RecentReviewCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        review.formattedDate,
+                        review.createdAt,
                         style: TextStyle(
                             fontSize: 13.sp,
                             color: AppColors.textWhite,

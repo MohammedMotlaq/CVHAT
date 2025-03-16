@@ -1,67 +1,50 @@
-import 'package:intl/intl.dart';
+import 'package:cvhat/models/comment_model.dart';
+import 'package:cvhat/models/cv_model.dart';
+import 'package:cvhat/utils/date_fotmating.dart';
 
 class Review {
   final int id;
   final bool isAI;
-  final DateTime createdAt;
+  final bool isFavorite;
+  final String createdAt;
+  final List<Comment>? comments;
   final CV cv;
+  final dynamic recruiter;
 
   Review({
     required this.id,
     required this.isAI,
+    required this.isFavorite,
     required this.createdAt,
+    this.comments,
     required this.cv,
+    this.recruiter,
   });
 
-  // Factory constructor to create a Review instance from JSON
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
       id: json['ID'],
       isAI: json['isAI'],
-      createdAt: DateTime.parse(json['createdAt']),
+      isFavorite: json['isFavorite'],
+      createdAt: DateFormating.formattedDate(json['createdAt']),
+      comments: json.containsKey('Comments')
+          ? (json['Comments'] as List).map((c) => Comment.fromJson(c)).toList()
+          : null,
       cv: CV.fromJson(json['CV']),
+      recruiter: json.containsKey('Recruiter') ? json['Recruiter'] : null,
     );
   }
 
-  // Converts Review object back to JSON
   Map<String, dynamic> toJson() {
     return {
       'ID': id,
       'isAI': isAI,
-      'createdAt': createdAt.toIso8601String(),
+      'isFavorite': isFavorite,
+      'createdAt': createdAt,
+      if (comments != null)
+        'Comments': comments!.map((c) => c.toJson()).toList(),
       'CV': cv.toJson(),
-    };
-  }
-
-  String get formattedDate {
-    return DateFormat("dd MMM yyyy").format(createdAt);
-  }
-}
-
-class CV {
-  final String title;
-  final String coverImageUrlLow;
-  final String fileName;
-
-  CV({
-    required this.title,
-    required this.coverImageUrlLow,
-    required this.fileName,
-  });
-
-  factory CV.fromJson(Map<String, dynamic> json) {
-    return CV(
-      title: json['title'],
-      coverImageUrlLow: json['coverImageUrlLow'],
-      fileName: json['fileName'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'coverImageUrlLow': coverImageUrlLow,
-      'fileName': fileName,
+      if (recruiter != null) 'Recruiter': recruiter,
     };
   }
 }
