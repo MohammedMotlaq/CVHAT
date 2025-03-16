@@ -3,25 +3,36 @@ import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/data/dummy_data.dart';
 import 'package:cvhat/models/review_details.dart';
 import 'package:cvhat/models/review_model.dart';
+import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
+import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class ReviewsHistory extends StatelessWidget {
-  const ReviewsHistory({super.key});
+  ReviewsHistory({super.key}) {
+    Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
+            listen: false)
+        .fetchAllReviews();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<Review> AllHistory =
-        DummyData.aiReviews.map((json) => Review.fromJson(json)).toList();
     return Scaffold(
-      backgroundColor: AppColors.bgWhite,
-      appBar: const HistoryAppBar(),
-      body: RecentReviewsList(
-        recentReviews: AllHistory,
-        height: 900,
-      ),
-    );
+        backgroundColor: AppColors.bgWhite,
+        appBar: const HistoryAppBar(),
+        body: Consumer<ReviewsProvider>(
+            builder: (context, reviewsProvider, child) {
+          return reviewsProvider.isLoading
+              ? const Expanded(child: LoaderBlurScreen())
+              : reviewsProvider.reviews.isEmpty
+                  ? const Expanded(child: LoaderBlurScreen())
+                  : RecentReviewsList(
+                      recentReviews: reviewsProvider.reviews,
+                      height: 900,
+                    );
+        }));
   }
 }
 
