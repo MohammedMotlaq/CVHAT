@@ -55,6 +55,7 @@ class RecentReviewCard extends StatelessWidget {
                     review.cv.coverImageUrlLow!,
                     fit: BoxFit.fill,
                     loadingBuilder: (context, child, isLoading) {
+                      if (isLoading == null) return child;
                       return Image.asset(AppIcons.cv);
                     },
                     errorBuilder: (context, child, stackTrace) {
