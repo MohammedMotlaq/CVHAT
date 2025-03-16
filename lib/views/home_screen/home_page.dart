@@ -1,8 +1,5 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
-import 'package:cvhat/data/dummy_data.dart';
-import 'package:cvhat/models/review_details.dart';
-import 'package:cvhat/models/review_model.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
@@ -48,11 +45,15 @@ class HomePage extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 18.w),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ReviewCard(label: "AI Reviews", value: "7"),
-                          ReviewCard(label: "Recruiter Feedback", value: "7"),
+                          ReviewCard(
+                              label: "AI Reviews",
+                              value: reviewsProvider.aiReviewsCount),
+                          ReviewCard(
+                              label: "Recruiter Feedback",
+                              value: reviewsProvider.recruiterReviewsCount),
                         ],
                       ),
                     ),
@@ -127,7 +128,7 @@ class HomePage extends StatelessWidget {
                 right: 14.w,
                 child: ElevatedButton(
                   onPressed: () {
-                    reviewsProvider.fetchRecentReviews();
+                    AppRouter.pushWidget(const UploadCv());
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),

@@ -10,7 +10,8 @@ class ReviewsProvider extends ChangeNotifier {
 
   List<Review> _reviews = [];
   List<Review> _recentReviews = [];
-
+  String _aiReviewsCount = "0";
+  String _recruiterReviewsCount = "0";
   final LocalStorageService localStorageService =
       LocalStorageService.localStorageService;
 
@@ -20,6 +21,10 @@ class ReviewsProvider extends ChangeNotifier {
   List<Review> get reviews => _reviews;
 
   List<Review> get recentReviews => _recentReviews;
+
+  String get aiReviewsCount => _aiReviewsCount;
+
+  String get recruiterReviewsCount => _recruiterReviewsCount;
 
   bool get isLoading => _isLoading;
 
@@ -68,6 +73,21 @@ class ReviewsProvider extends ChangeNotifier {
     try {
       String? userToken = await localStorageService.getUserToken();
       _recentReviews = await _reviewsService.fetchFavoriteReviews(userToken!);
+    } catch (e) {
+      _errorMessage = e.toString();
+      AppRouter.toastificationSnackBar(
+          "Error", _errorMessage!, ToastificationType.error);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> fetchReviewsCounts() async {
+    try {
+      String? userToken = await localStorageService.getUserToken();
+      final res = await _reviewsService.fetchReviewsCounts(userToken!);
+      print(res.toString());
     } catch (e) {
       _errorMessage = e.toString();
       AppRouter.toastificationSnackBar(
