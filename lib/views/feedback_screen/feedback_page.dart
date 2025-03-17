@@ -1,8 +1,10 @@
+import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/feedback_provider.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_app_bar.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_comment.dart';
+import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,67 +24,72 @@ class FeedbackPage extends StatelessWidget {
             builder: (context, feedBackProvider, child) {
           return feedBackProvider.isLoading
               ? const LoaderBlurScreen()
-              : SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 18.w),
-                    width: 390.w,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.r),
-                              color: AppColors.secondary,
+              : feedBackProvider.isAnalyzing
+                  ? const EmptyListWidget(
+                      jsonFile: AppAnimations.empty,
+                      title: "Analyzing Your CV!",
+                      showArrow: false)
+                  : SingleChildScrollView(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 18.w),
+                        width: 390.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 20.h,
                             ),
-                            width: 232.w,
-                            height: 282.h,
-                            child: Image.network(
-                              feedBackProvider
-                                  .singleFeedBack!.cv.coverImageUrlHigh!,
+                            Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  color: AppColors.secondary,
+                                ),
+                                width: 232.w,
+                                height: 282.h,
+                                child: Image.network(
+                                  feedBackProvider
+                                      .singleFeedBack!.cv.coverImageUrlHigh!,
+                                ),
+                              ),
                             ),
-                          ),
+                            SizedBox(
+                              height: 18.h,
+                            ),
+                            Text(
+                              "Comments on your resume:",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.textSecondary,
+                                  fontSize: 22.sp),
+                            ),
+                            SizedBox(
+                              height: 18.h,
+                            ),
+                            ListView.separated(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.only(top: 28.h),
+                              physics: const NeverScrollableScrollPhysics(),
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: 25.h),
+                              itemCount: feedBackProvider
+                                  .singleFeedBack!.comments!.length,
+                              itemBuilder: (context, index) {
+                                return FeedbackComment(
+                                  title: feedBackProvider
+                                      .singleFeedBack!.comments![index].title,
+                                  comment: feedBackProvider.singleFeedBack!
+                                      .comments![index].description,
+                                );
+                              },
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            )
+                          ],
                         ),
-                        SizedBox(
-                          height: 18.h,
-                        ),
-                        Text(
-                          "Comments on your resume:",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.textSecondary,
-                              fontSize: 22.sp),
-                        ),
-                        SizedBox(
-                          height: 18.h,
-                        ),
-                        ListView.separated(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.only(top: 28.h),
-                          physics: const NeverScrollableScrollPhysics(),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: 25.h),
-                          itemCount:
-                              feedBackProvider.singleFeedBack!.comments!.length,
-                          itemBuilder: (context, index) {
-                            return FeedbackComment(
-                              title: feedBackProvider
-                                  .singleFeedBack!.comments![index].title,
-                              comment: feedBackProvider
-                                  .singleFeedBack!.comments![index].description,
-                            );
-                          },
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        )
-                      ],
-                    ),
-                  ),
-                );
+                      ),
+                    );
         }),
         floatingActionButton: FloatingActionButton(
           shape: const CircleBorder(),

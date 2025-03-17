@@ -7,6 +7,7 @@ import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/views/reviews_history/reviews_history.dart';
 import 'package:cvhat/views/drawer/app_drawer_widget.dart';
+import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
