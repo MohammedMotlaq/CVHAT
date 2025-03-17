@@ -154,4 +154,25 @@ class ReviewsService {
       throw Exception(e.toString());
     }
   }
+
+  Future<bool> toggleFavorite(String userToken, int reviewID) async {
+    try {
+      Response response = await _dio.post(
+        "${ApiEndPoints.toggleFavorite}/$reviewID",
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

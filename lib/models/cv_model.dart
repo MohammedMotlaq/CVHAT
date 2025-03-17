@@ -1,6 +1,5 @@
 class CV {
   final int? id;
-  final String? title;
   final String? content;
   final String fileName;
   final String? url;
@@ -10,7 +9,6 @@ class CV {
 
   CV({
     this.id,
-    this.title,
     this.content,
     required this.fileName,
     this.url,
@@ -22,7 +20,6 @@ class CV {
   factory CV.fromJson(Map<String, dynamic> json) {
     return CV(
       id: json.containsKey('ID') ? json['ID'] : null,
-      title: json['title'],
       content: json['content'] ?? '',
       fileName: json['fileName'],
       url: json['url'],
@@ -35,7 +32,6 @@ class CV {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'ID': id,
-      if (title != null) 'title': title,
       if (content != null) 'content': content,
       'fileName': fileName,
       if (url != null) 'url': url,

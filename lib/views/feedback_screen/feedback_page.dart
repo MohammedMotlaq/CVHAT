@@ -15,14 +15,14 @@ class FeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        backgroundColor: AppColors.bgWhite,
-        appBar: const FeedbackAppBar(),
-        body: Consumer<FeedBackProvider>(
-            builder: (context, feedBackProvider, child) {
-          return feedBackProvider.isLoading
+    return Consumer<FeedBackProvider>(
+        builder: (context, feedBackProvider, child) {
+      return PopScope(
+        canPop: false,
+        child: Scaffold(
+          backgroundColor: AppColors.bgWhite,
+          appBar: const FeedbackAppBar(),
+          body: feedBackProvider.isLoading
               ? const LoaderBlurScreen()
               : feedBackProvider.isAnalyzing
                   ? const EmptyListWidget(
@@ -92,20 +92,22 @@ class FeedbackPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                    );
-        }),
-        floatingActionButton: FloatingActionButton(
-          shape: const CircleBorder(),
-          backgroundColor: AppColors.secondary_3,
-          tooltip: "Save",
-          onPressed: () {},
-          child: Icon(
-            Icons.bookmark_border_rounded,
-            size: 24.w,
-            color: AppColors.bgWhite,
+                    ),
+          floatingActionButton: FloatingActionButton(
+            shape: const CircleBorder(),
+            backgroundColor: AppColors.secondary_3,
+            tooltip: "Save",
+            onPressed: () {},
+            child: Icon(
+              feedBackProvider.isReviewFavorite!
+                  ? Icons.favorite
+                  : Icons.favorite_border_rounded,
+              size: 24.w,
+              color: AppColors.bgWhite,
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

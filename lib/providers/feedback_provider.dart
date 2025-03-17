@@ -15,6 +15,7 @@ class FeedBackProvider extends ChangeNotifier {
   TextEditingController submitCvController = TextEditingController();
   CV? postCVResponse;
   Review? singleFeedBack;
+  bool? isReviewFavorite;
   bool _isLoading = false;
   bool _isUploading = false;
   bool _isAnalyzing = false;
@@ -28,6 +29,8 @@ class FeedBackProvider extends ChangeNotifier {
 
   Future<void> fetchReviewByID(int reviewId) async {
     _isLoading = true;
+    singleFeedBack = null;
+    isReviewFavorite = false;
     notifyListeners();
     AppRouter.pushWidget(const FeedbackPage());
 
@@ -36,6 +39,7 @@ class FeedBackProvider extends ChangeNotifier {
       Review review =
           await _reviewsService.fetchReviewByID(userToken!, reviewId);
       singleFeedBack = review;
+      isReviewFavorite = singleFeedBack!.isFavorite;
       notifyListeners();
     } catch (e) {
       AppRouter.toastificationSnackBar(
@@ -53,22 +57,16 @@ class FeedBackProvider extends ChangeNotifier {
       if (selectedFile == null) {
         AppRouter.toastificationSnackBar(
             "Error", "Please Select a File", ToastificationType.error);
-        _isLoading = false;
-        notifyListeners();
         return;
       }
       if (submitCvController.text.isEmpty) {
         AppRouter.toastificationSnackBar(
             "Error", "Please Enter a Title", ToastificationType.error);
-        _isLoading = false;
-        notifyListeners();
         return;
       }
       if (selectedFile.extension != "pdf") {
         AppRouter.toastificationSnackBar(
             "Error", "Please select  a PDF file", ToastificationType.error);
-        _isLoading = false;
-        notifyListeners();
         return;
       }
       print("Uploading cv in provider Cv in Service");
@@ -80,15 +78,11 @@ class FeedBackProvider extends ChangeNotifier {
       if (postCVResponse != null) {
         AppRouter.toastificationSnackBar(
             "Success", "CV uploaded successfully", ToastificationType.success);
-        _isLoading = false;
-        notifyListeners();
         await postAIReview();
       }
     } catch (e) {
       AppRouter.toastificationSnackBar(
           "Error", "Somthing Went Wrong!", ToastificationType.error);
-      _isLoading = false;
-      notifyListeners();
     } finally {
       _isUploading = false;
       notifyListeners();
@@ -96,6 +90,8 @@ class FeedBackProvider extends ChangeNotifier {
   }
 
   Future postAIReview() async {
+    singleFeedBack = null;
+    isReviewFavorite = false;
     _isAnalyzing = true;
     notifyListeners();
     AppRouter.pushWithReplacement(const FeedbackPage());
@@ -105,6 +101,7 @@ class FeedBackProvider extends ChangeNotifier {
       String? userToken = await localStorageService.getUserToken();
       singleFeedBack =
           await _reviewsService.postAiReview(userToken!, postCVResponse!.id!);
+      isReviewFavorite = singleFeedBack!.isFavorite;
     } catch (e) {
       print(e.toString());
       AppRouter.toastificationSnackBar(
@@ -115,8 +112,17 @@ class FeedBackProvider extends ChangeNotifier {
     }
   }
 
-  void changeIsLoading() {
-    _isLoading = !isLoading;
-    notifyListeners();
+  Future toggleFavorite() async {
+    try {
+      String? userToken = await localStorageService.getUserToken();
+      bool isFavorite =
+          await _reviewsService.toggleFavorite(userToken!, singleFeedBack!.id);
+      if (isFavorite) {
+        isReviewFavorite = singleFeedBack!.isFavorite;
+        notifyListeners();
+      }
+    } catch (e) {
+      print(e.toString());
+    }
   }
 }
