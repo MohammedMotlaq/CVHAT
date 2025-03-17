@@ -26,11 +26,12 @@ class FeedbackPage extends StatelessWidget {
               ? const LoaderBlurScreen()
               : feedBackProvider.isAnalyzing
                   ? const EmptyListWidget(
-                      width: double.infinity,
-                      height: double.infinity,
-                      jsonFile: AppAnimations.empty,
+                      jsonFile: AppAnimations.analyze,
                       title: "Analyzing Your CV!",
-                      showArrow: false)
+                      showArrow: false,
+                      width: 280,
+                      height: 280,
+                    )
                   : SingleChildScrollView(
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 18.w),
