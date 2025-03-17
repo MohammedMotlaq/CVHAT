@@ -17,6 +17,9 @@ class HomePage extends StatelessWidget {
     Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
             listen: false)
         .fetchRecentReviews();
+    Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
+            listen: false)
+        .fetchReviewsCounts();
   }
 
   @override
@@ -127,8 +130,8 @@ class HomePage extends StatelessWidget {
                 bottom: 20.h,
                 right: 14.w,
                 child: ElevatedButton(
-                  onPressed: () {
-                    reviewsProvider.fetchRecentReviews();
+                  onPressed: () async {
+                    await reviewsProvider.fetchReviewsCounts();
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),

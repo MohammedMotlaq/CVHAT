@@ -88,8 +88,8 @@ class ReviewsProvider extends ChangeNotifier {
     try {
       String? userToken = await localStorageService.getUserToken();
       final res = await _reviewsService.fetchReviewsCounts(userToken!);
-      _aiReviewsCount = res["_aiReviewsCount"];
-      _recruiterReviewsCount = res["recruiterReviewsCount"];
+      _aiReviewsCount = res["aiReviewCount"].toString();
+      _recruiterReviewsCount = res["recruiterReviewCount"].toString();
       notifyListeners();
     } catch (e) {
       _errorMessage = e.toString();
