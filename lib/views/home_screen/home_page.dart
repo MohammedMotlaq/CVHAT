@@ -1,15 +1,18 @@
+import 'package:animator/animator.dart';
 import 'package:cvhat/app_router.dart';
+import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/views/reviews_history/reviews_history.dart';
-import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
 import 'package:cvhat/views/drawer/app_drawer_widget.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
+import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -106,44 +109,45 @@ class HomePage extends StatelessWidget {
                             ? RecentReviewsList(
                                 recentReviews: reviewsProvider.recentReviews,
                                 scrollable: false)
-                            : Expanded(
-                                child: Center(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 20.w),
-                                  child: Text(
-                                    "No Reviews Found, Start uploading now!",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 32.sp,
-                                        color: AppColors.textPrimary),
-                                    textAlign: TextAlign.center,
-                                  ),
+                            : const Expanded(
+                                child: EmptyListWidget(
+                                  jsonFile: AppAnimations.empty,
+                                  title: "Upload now and get noticed!",
+                                  showArrow: true,
                                 ),
-                              ))
+                              )
                   ],
                 )),
-            Positioned(
-                bottom: 20.h,
-                right: 14.w,
-                child: ElevatedButton(
-                  onPressed: () {
-                    reviewsProvider.fetchRecentReviews();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(),
-                    backgroundColor: AppColors.secondary_3,
-                    elevation: 9,
-                    shadowColor: Colors.black,
-                    minimumSize:
-                        Size(60.w, 60.h), // Circular button with 60 radius
-                  ),
-                  child: Icon(
-                    Icons.add_rounded, // Or any icon you want to use
-                    size: 32.sp,
-                    color: Colors.white,
-                  ),
-                )),
+            Animator(
+                duration: const Duration(milliseconds: 1000),
+                cycles: 0,
+                curve: Curves.easeInOut,
+                tween: Tween(begin: 55.0.sp, end: 60.0.sp),
+                builder: (context, animateState, child) {
+                  return Positioned(
+                      bottom: 20.h,
+                      right: 14.w,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          reviewsProvider.fetchRecentReviews();
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: const CircleBorder(),
+                          backgroundColor: AppColors.secondary_3,
+                          elevation: 9,
+                          shadowColor: Colors.black,
+                          minimumSize: Size(
+                              animateState.value,
+                              animateState
+                                  .value), // Circular button with 60 radius
+                        ),
+                        child: Icon(
+                          Icons.add_rounded, // Or any icon you want to use
+                          size: 32.sp,
+                          color: Colors.white,
+                        ),
+                      ));
+                }),
           ],
         ),
       );
