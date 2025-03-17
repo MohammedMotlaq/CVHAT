@@ -1,7 +1,5 @@
-import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FilePickerProvider extends ChangeNotifier {
   PlatformFile? selectedFile;
@@ -36,24 +34,5 @@ class FilePickerProvider extends ChangeNotifier {
     selectedFile = null;
     errorMessage = null;
     notifyListeners();
-  }
-
-  Widget buildFilePreview() {
-    var selectedFileExtension = selectedFile!.extension!;
-    if (["jpg", "png", "jpeg"].contains(selectedFileExtension.toLowerCase())) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.memory(
-          selectedFile!.bytes!,
-          fit: BoxFit.cover,
-        ),
-      );
-    } else if (selectedFileExtension == "pdf") {
-      return Icon(Icons.picture_as_pdf,
-          color: AppColors.secondary, size: 48.sp);
-    } else {
-      return Icon(Icons.insert_drive_file,
-          color: AppColors.secondary, size: 48.sp);
-    }
   }
 }
