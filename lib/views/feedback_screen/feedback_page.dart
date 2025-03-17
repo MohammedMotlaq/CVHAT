@@ -1,6 +1,7 @@
 import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/feedback_provider.dart';
+import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_app_bar.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_comment.dart';
 import 'package:cvhat/widgets/empty_list_widget.dart';
@@ -14,8 +15,8 @@ class FeedbackPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FeedBackProvider>(
-        builder: (context, feedBackProvider, child) {
+    return Consumer2<FeedBackProvider, ReviewsProvider>(
+        builder: (context, feedBackProvider, reviewsProivder, child) {
       return PopScope(
         canPop: false,
         child: Scaffold(
@@ -96,8 +97,11 @@ class FeedbackPage extends StatelessWidget {
             shape: const CircleBorder(),
             backgroundColor: AppColors.secondary_3,
             tooltip: "Save",
-            onPressed: () {
-              feedBackProvider.toggleFavorite();
+            onPressed: () async {
+              feedBackProvider.toggleIsReviewFavorite();
+
+              await reviewsProivder
+                  .toggleFavorite(feedBackProvider.singleFeedBack!.id);
             },
             child: Icon(
               feedBackProvider.isReviewFavorite!

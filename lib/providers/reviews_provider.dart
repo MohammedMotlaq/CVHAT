@@ -1,5 +1,6 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/services/local_storage_service.dart';
+import 'package:cvhat/views/favorite_screen/favorite_screen.dart';
 import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
@@ -11,6 +12,7 @@ class ReviewsProvider extends ChangeNotifier {
 
   List<Review> _reviews = [];
   List<Review> _recentReviews = [];
+  List<Review> _favoriteReviews = [];
   String _aiReviewsCount = "0";
   String _recruiterReviewsCount = "0";
   final LocalStorageService localStorageService =
@@ -30,6 +32,8 @@ class ReviewsProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   String? get errorMessage => _errorMessage;
+
+  List<Review> get favoriteReviews => _favoriteReviews;
 
   Future<void> fetchAllReviews() async {
     _isLoading = true;
@@ -66,14 +70,18 @@ class ReviewsProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchFavoriteReviews(String? type) async {
+  Future<void> fetchFavoriteReviews(
+      {required bool navigateToFavoritesScreen}) async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
+    if (navigateToFavoritesScreen) {
+      AppRouter.pushWidget(const FavoriteScreen());
+    }
 
     try {
       String? userToken = await localStorageService.getUserToken();
-      _recentReviews = await _reviewsService.fetchFavoriteReviews(userToken!);
+      _favoriteReviews = await _reviewsService.fetchFavoriteReviews(userToken!);
     } catch (e) {
       _errorMessage = e.toString();
       AppRouter.toastificationSnackBar(
@@ -81,6 +89,16 @@ class ReviewsProvider extends ChangeNotifier {
     } finally {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  Future toggleFavorite(int feedbackID) async {
+    try {
+      String? userToken = await localStorageService.getUserToken();
+      await _reviewsService.toggleFavorite(userToken!, feedbackID);
+      await fetchFavoriteReviews(navigateToFavoritesScreen: false);
+    } catch (e) {
+      print(e.toString());
     }
   }
 

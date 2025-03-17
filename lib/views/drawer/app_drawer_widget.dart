@@ -2,6 +2,7 @@ import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/core/resources/app_icons.dart';
 import 'package:cvhat/providers/auth_provider.dart';
+import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/drawer/widgets/list_tile_widget.dart';
 import 'package:cvhat/views/drawer/widgets/user_account_details.dart';
@@ -20,8 +21,8 @@ class AppDrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         backgroundColor: AppColors.bgWhite,
-        child: Consumer2<UiProvider, AuthProvider>(
-          builder: (context, uiProvider, authProvider, child) {
+        child: Consumer3<UiProvider, AuthProvider, ReviewsProvider>(
+          builder: (context, uiProvider, authProvider, reviewsProvider, child) {
             return Column(
               children: [
                 const UserAccountDetails(),
@@ -45,7 +46,8 @@ class AppDrawerWidget extends StatelessWidget {
                                   break;
                                 case 1:
                                   AppRouter.popWidget();
-                                  AppRouter.pushWidget(const FavoriteScreen());
+                                  reviewsProvider.fetchFavoriteReviews(
+                                      navigateToFavoritesScreen: true);
                                   break;
                                 case 2:
                                   AppRouter.popWidget();

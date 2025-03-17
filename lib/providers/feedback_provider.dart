@@ -114,15 +114,4 @@ class FeedBackProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
-
-  Future toggleFavorite() async {
-    try {
-      toggleIsReviewFavorite();
-      String? userToken = await localStorageService.getUserToken();
-      bool isFavorite =
-          await _reviewsService.toggleFavorite(userToken!, singleFeedBack!.id);
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 }
