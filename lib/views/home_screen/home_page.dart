@@ -12,7 +12,6 @@ import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -20,6 +19,9 @@ class HomePage extends StatelessWidget {
     Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
             listen: false)
         .fetchRecentReviews();
+    Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
+            listen: false)
+        .fetchReviewsCounts();
   }
 
   @override
@@ -148,6 +150,27 @@ class HomePage extends StatelessWidget {
                         ),
                       ));
                 }),
+            Positioned(
+                bottom: 20.h,
+                right: 14.w,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await reviewsProvider.fetchReviewsCounts();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: const CircleBorder(),
+                    backgroundColor: AppColors.secondary_3,
+                    elevation: 9,
+                    shadowColor: Colors.black,
+                    minimumSize:
+                        Size(60.w, 60.h), // Circular button with 60 radius
+                  ),
+                  child: Icon(
+                    Icons.add_rounded, // Or any icon you want to use
+                    size: 32.sp,
+                    color: Colors.white,
+                  ),
+                )),
           ],
         ),
       );
