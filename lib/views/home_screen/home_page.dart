@@ -15,6 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+import '../upload_cv_screen/upload_cv.dart';
+
 class HomePage extends StatelessWidget {
   HomePage({super.key}) {
     Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
@@ -117,6 +119,8 @@ class HomePage extends StatelessWidget {
                                   jsonFile: AppAnimations.empty,
                                   title: "Upload now and get noticed!",
                                   showArrow: true,
+                                  width: 250,
+                                  height: 200,
                                 ),
                               )
                   ],

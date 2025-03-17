@@ -9,22 +9,27 @@ class EmptyListWidget extends StatelessWidget {
       {super.key,
       required this.jsonFile,
       required this.title,
-      required this.showArrow});
+      required this.showArrow,
+      required this.width,
+      required this.height});
 
   final String jsonFile;
   final String title;
   final bool showArrow;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           width: 390.w,
+          height: showArrow ? 70.h : 180.h,
         ),
-        Lottie.asset(jsonFile, width: 250.w, height: 200.h, fit: BoxFit.fill),
+        Lottie.asset(jsonFile,
+            width: width.w, height: height.h, fit: BoxFit.fill),
         SizedBox(
           height: 10.h,
         ),

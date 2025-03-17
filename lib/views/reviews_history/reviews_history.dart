@@ -34,6 +34,8 @@ class ReviewsHistory extends StatelessWidget {
                       jsonFile: AppAnimations.empty,
                       title: "Nothing To Show!",
                       showArrow: false,
+                      width: 350,
+                      height: 280,
                     );
         }));
   }
