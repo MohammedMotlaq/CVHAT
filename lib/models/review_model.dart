@@ -5,6 +5,8 @@ import 'package:cvhat/utils/date_fotmating.dart';
 class Review {
   final int id;
   final bool isAI;
+  final String? title;
+
   final bool isFavorite;
   final String createdAt;
   final List<Comment>? comments;
@@ -14,6 +16,7 @@ class Review {
   Review({
     required this.id,
     required this.isAI,
+    this.title,
     required this.isFavorite,
     required this.createdAt,
     this.comments,
@@ -26,6 +29,7 @@ class Review {
       id: json['ID'],
       isAI: json['isAI'],
       isFavorite: json['isFavorite'],
+      title: json['title'],
       createdAt: json['createdAt'],
       comments: json.containsKey('Comments')
           ? (json['Comments'] as List).map((c) => Comment.fromJson(c)).toList()
@@ -41,6 +45,7 @@ class Review {
       'isAI': isAI,
       'isFavorite': isFavorite,
       'createdAt': createdAt,
+      if (title != null) 'title': title,
       if (comments != null)
         'Comments': comments!.map((c) => c.toJson()).toList(),
       'CV': cv.toJson(),

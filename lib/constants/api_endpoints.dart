@@ -13,4 +13,5 @@ class ApiEndPoints {
   static const String getUserReviewsCount = "$getUserReviews/count";
   static const String postAiReview = "$getUserReviews/ai";
   static const String postUserCv = "$baseUrl/user/cv";
+  static const String toggleFavorite = "$getUserReviews/toggle-favorites/";
 }
