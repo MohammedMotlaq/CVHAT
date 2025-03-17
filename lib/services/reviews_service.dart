@@ -9,8 +9,8 @@ class ReviewsService {
 
   static ReviewsService reviewsService = ReviewsService._();
   final Dio _dio = Dio(BaseOptions(
-    connectTimeout: const Duration(seconds: 10),
-    receiveTimeout: const Duration(seconds: 10),
+    connectTimeout: const Duration(seconds: 20),
+    receiveTimeout: const Duration(seconds: 20),
   ));
 
   Future<List<Review>> _fetchReviews(String userToken, String endpoint) async {
@@ -101,6 +101,8 @@ class ReviewsService {
   Future<CV> postCV(
       String userToken, PlatformFile pdfFile, String title) async {
     try {
+      print("Uploading cv in service Cv in Service");
+
       MultipartFile multiPartFile = await MultipartFile.fromFile(
         pdfFile.path!,
         filename: pdfFile.name,
@@ -123,6 +125,31 @@ class ReviewsService {
       } else {
         throw Exception("Error Posting CV");
       }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<Review> postAiReview(String userToken, int cvID) async {
+    try {
+      print("getting review in Service");
+      Response response = await _dio.post(
+        ApiEndPoints.postAiReview,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+          },
+        ),
+        data: {"cv": cvID},
+      );
+
+      if (response.statusCode == 200) {
+        return Review.fromJson(response.data["data"]["review"]);
+      } else {
+        throw Exception("Error Posting AI Review");
+      }
+    } on DioException catch (e) {
+      throw Exception(e.toString());
     } catch (e) {
       throw Exception(e.toString());
     }
