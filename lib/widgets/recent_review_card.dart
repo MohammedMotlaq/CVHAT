@@ -85,7 +85,7 @@ class RecentReviewCard extends StatelessWidget {
                         SizedBox(
                           width: 215.w,
                           child: Text(
-                            review.cv.title,
+                            review.cv.title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

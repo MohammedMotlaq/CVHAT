@@ -1,6 +1,7 @@
 import 'package:cvhat/constants/api_endpoints.dart';
+import 'package:cvhat/models/cv_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:file_picker/file_picker.dart';
 import '../models/review_model.dart';
 
 class ReviewsService {
@@ -94,6 +95,36 @@ class ReviewsService {
       throw Exception("Failed to load Reviews Counts");
     } catch (e) {
       throw Exception("Error fetching reviews: $e");
+    }
+  }
+
+  Future<CV> postCV(
+      String userToken, PlatformFile pdfFile, String title) async {
+    try {
+      MultipartFile multiPartFile = await MultipartFile.fromFile(
+        pdfFile.path!,
+        filename: pdfFile.name,
+        contentType: DioMediaType("application", "pdf"),
+      );
+
+      FormData data = FormData.fromMap({'cv': multiPartFile, 'title': title});
+      Response response = await _dio.post(
+        ApiEndPoints.postUserCv,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+          },
+        ),
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        return CV.fromJson(response.data["data"]["cv"]);
+      } else {
+        throw Exception("Error Posting CV");
+      }
+    } catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

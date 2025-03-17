@@ -1,6 +1,6 @@
 class CV {
   final int? id;
-  final String title;
+  final String? title;
   final String? content;
   final String fileName;
   final String? url;
@@ -10,7 +10,7 @@ class CV {
 
   CV({
     this.id,
-    required this.title,
+    this.title,
     this.content,
     required this.fileName,
     this.url,
@@ -35,7 +35,7 @@ class CV {
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'ID': id,
-      'title': title,
+      if (title != null) 'title': title,
       if (content != null) 'content': content,
       'fileName': fileName,
       if (url != null) 'url': url,

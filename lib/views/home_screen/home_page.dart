@@ -154,8 +154,8 @@ class HomePage extends StatelessWidget {
                 bottom: 20.h,
                 right: 14.w,
                 child: ElevatedButton(
-                  onPressed: () async {
-                    await reviewsProvider.fetchReviewsCounts();
+                  onPressed: () {
+                    AppRouter.pushWidget(const UploadCv());
                   },
                   style: ElevatedButton.styleFrom(
                     shape: const CircleBorder(),
