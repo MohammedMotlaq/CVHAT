@@ -5,6 +5,7 @@ import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/drawer/widgets/list_tile_widget.dart';
 import 'package:cvhat/views/drawer/widgets/user_account_details.dart';
+import 'package:cvhat/views/favorite_screen/favorite_screen.dart';
 import 'package:cvhat/views/premium_screen/premium_screen.dart';
 import 'package:cvhat/views/profile_screen/profile_screen.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
@@ -43,6 +44,8 @@ class AppDrawerWidget extends StatelessWidget {
                                   AppRouter.popWidget();
                                   break;
                                 case 1:
+                                  AppRouter.popWidget();
+                                  AppRouter.pushWidget(const FavoriteScreen());
                                   break;
                                 case 2:
                                   AppRouter.popWidget();

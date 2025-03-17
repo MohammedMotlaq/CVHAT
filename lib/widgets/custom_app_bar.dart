@@ -23,7 +23,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(
         title,
         style: TextStyle(
-            fontSize: 32.sp, fontWeight: FontWeight.bold, color: textColor),
+            fontSize: 32.sp,
+            fontFamily: 'PlayfairDisplay',
+            fontWeight: FontWeight.bold,
+            color: textColor),
       ),
       centerTitle: true,
       leading: IconButton(
