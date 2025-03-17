@@ -131,7 +131,7 @@ class SignupWidget extends StatelessWidget {
                     uiProvider.setAuthState(AuthState.login);
                   },
                   child: SizedBox(
-                    width: 144.w,
+                    width: 154.w,
                     height: 25.h,
                     child: Row(
                       children: [

@@ -1,7 +1,9 @@
 import 'package:cvhat/app_router.dart';
+import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
+import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,18 +24,16 @@ class ReviewsHistory extends StatelessWidget {
         body: Consumer<ReviewsProvider>(
             builder: (context, reviewsProvider, child) {
           return reviewsProvider.isLoading
-              ? const SizedBox(
-                  height: double.infinity,
-                  width: double.infinity,
-                  child: LoaderBlurScreen())
-              : reviewsProvider.reviews.isEmpty
-                  ? const SizedBox(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: LoaderBlurScreen())
-                  : RecentReviewsList(
+              ? const LoaderBlurScreen()
+              : reviewsProvider.reviews.isNotEmpty
+                  ? RecentReviewsList(
                       recentReviews: reviewsProvider.reviews,
                       height: 900,
+                    )
+                  : const EmptyListWidget(
+                      jsonFile: AppAnimations.empty,
+                      title: "Nothing To Show!",
+                      showArrow: false,
                     );
         }));
   }

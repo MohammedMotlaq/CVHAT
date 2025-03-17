@@ -103,7 +103,7 @@ class LoginWidget extends StatelessWidget {
                   authFormProvider.clearControllers();
                 },
                 child: SizedBox(
-                  width: 160.w,
+                  width: 170.w,
                   height: 25.h,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
