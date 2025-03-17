@@ -1,7 +1,6 @@
 import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/feedback_provider.dart';
-import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_app_bar.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_comment.dart';
 import 'package:cvhat/widgets/empty_list_widget.dart';
@@ -97,7 +96,9 @@ class FeedbackPage extends StatelessWidget {
             shape: const CircleBorder(),
             backgroundColor: AppColors.secondary_3,
             tooltip: "Save",
-            onPressed: () {},
+            onPressed: () {
+              feedBackProvider.toggleFavorite();
+            },
             child: Icon(
               feedBackProvider.isReviewFavorite!
                   ? Icons.favorite
