@@ -65,15 +65,17 @@ class FeedBackProvider extends ChangeNotifier {
             "Error", "Please select  a PDF file", ToastificationType.error);
         return;
       }
+      print("Uploading cv in provider Cv in Service");
 
       String? userToken = await localStorageService.getUserToken();
       postCVResponse = await _reviewsService.postCV(
           userToken!, selectedFile, submitCvController.text);
+      notifyListeners();
       if (postCVResponse != null) {
         AppRouter.toastificationSnackBar(
             "Success", "CV uploaded successfully", ToastificationType.success);
+        await postAIReview();
       }
-      notifyListeners();
     } catch (e) {
       AppRouter.toastificationSnackBar(
           "Error", "Somthing Went Wrong!", ToastificationType.error);
@@ -83,5 +85,23 @@ class FeedBackProvider extends ChangeNotifier {
     }
   }
 
-  Future postAIReview() async {}
+  Future postAIReview() async {
+    _isAnalyzing = true;
+    notifyListeners();
+    AppRouter.pushWithReplacement(const FeedbackPage());
+    try {
+      print("getting review in provider Cv in Service");
+      print("CV id is:" + postCVResponse!.id!.toString());
+      String? userToken = await localStorageService.getUserToken();
+      singleFeedBack =
+          await _reviewsService.postAiReview(userToken!, postCVResponse!.id!);
+    } catch (e) {
+      print(e.toString());
+      AppRouter.toastificationSnackBar(
+          "Error", "Error PostingAi Review", ToastificationType.error);
+    } finally {
+      _isAnalyzing = false;
+      notifyListeners();
+    }
+  }
 }
