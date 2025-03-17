@@ -14,92 +14,40 @@ class DummyData {
 
   static const List<Map<String, dynamic>> aiReviews = [
     {
-      "ID": 1,
-      "isAI": true,
-      "createdAt": "2025-03-13T08:18:32.000Z",
-      "CV": {
-        "title": "Yusuf",
-        "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/32e21030-8da4-4c82-9458-5da318f4fe94/ad06ea24-844c-4eb6-9598-131be5226849.png",
-        "fileName": "Yusuf's CV.pdf"
-      }
-    },
-    {
-      "ID": 2,
-      "isAI": true,
-      "createdAt": "2025-03-13T08:50:14.000Z",
-      "CV": {
-        "title": "Yusuf",
-        "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
-      }
-    },
-    {
+      "createdAt": "15 Mar 2025",
       "ID": 3,
       "isAI": true,
-      "createdAt": "2025-03-13T08:57:38.000Z",
+      "isFavorite": false,
       "CV": {
-        "title": "Yusuf",
+        "title": "Oday",
         "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
+            "https://cvhat.blob.core.windows.net/uploads/2/7e87cddc-8d17-46d3-b0cc-119e73738814/854e6f05-9d33-4829-a35c-5d0f1516c6d5.png",
+        "fileName": "OdayAbumettleqResume.pdf"
       }
     },
     {
-      "ID": 4,
+      "createdAt": "16 Mar 2025",
+      "ID": 17,
       "isAI": true,
-      "createdAt": "2025-03-13T09:07:45.000Z",
+      "isFavorite": false,
       "CV": {
-        "title": "Yusuf",
+        "title": "Oday",
         "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
+            "https://cvhat.blob.core.windows.net/uploads/2/7e87cddc-8d17-46d3-b0cc-119e73738814/854e6f05-9d33-4829-a35c-5d0f1516c6d5.png",
+        "fileName": "OdayAbumettleqResume.pdf"
       }
     },
     {
-      "ID": 5,
+      "createdAt": "17 Mar 2025",
+      "ID": 20,
       "isAI": true,
-      "createdAt": "2025-03-13T09:10:57.000Z",
+      "isFavorite": false,
       "CV": {
-        "title": "Yusuf",
+        "title": "FrontEnd",
         "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
+            "https://cvhat.blob.core.windows.net/uploads/2/61fd1499-b0c0-4aba-b4ad-41ca0f59e426/c0fc0818-b532-4a4c-8eac-bbb2ecd7d246.png",
+        "fileName": "OdayAbumettleqResume.pdf"
       }
     },
-    {
-      "ID": 6,
-      "isAI": true,
-      "createdAt": "2025-03-13T09:12:10.000Z",
-      "CV": {
-        "title": "Yusuf",
-        "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
-      }
-    },
-    {
-      "ID": 7,
-      "isAI": true,
-      "createdAt": "2025-03-13T09:15:00.000Z",
-      "CV": {
-        "title": "Yusuf",
-        "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/72ba0447-6292-4ef7-836c-23bd34322058/a1930e51-070b-4365-91a1-815d3c03f3d6.png",
-        "fileName": "Yusuf's CV.pdf"
-      }
-    },
-    {
-      "ID": 8,
-      "isAI": true,
-      "createdAt": "2025-03-15T08:43:25.000Z",
-      "CV": {
-        "title": "Yusuf",
-        "coverImageUrlLow":
-            "https://cvhat.blob.core.windows.net/uploads/1/92bbdd78-a1e5-4e27-9de2-039cf3bcefaf/db5c3e1e-2597-4c65-9b7c-e79e30387321.png",
-        "fileName": "Yusuf's CV.pdf"
-      }
-    }
   ];
 }
