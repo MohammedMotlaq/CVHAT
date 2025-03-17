@@ -73,7 +73,7 @@ class ReviewsService {
     return await _fetchReviews(userToken, ApiEndPoints.getUserFavoriteReviews);
   }
 
-  Future<Map> fetchReviewsCounts(String userToken) async {
+  Future<Map<String, int>> fetchReviewsCounts(String userToken) async {
     try {
       final response = await _dio.get(
         ApiEndPoints.getUserReviewsCount,
