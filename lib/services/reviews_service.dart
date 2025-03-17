@@ -98,8 +98,7 @@ class ReviewsService {
     }
   }
 
-  Future<CV> postCV(
-      String userToken, PlatformFile pdfFile, String title) async {
+  Future<CV> postCV(String userToken, PlatformFile pdfFile) async {
     try {
       print("Uploading cv in service Cv in Service");
 
@@ -109,7 +108,7 @@ class ReviewsService {
         contentType: DioMediaType("application", "pdf"),
       );
 
-      FormData data = FormData.fromMap({'cv': multiPartFile, 'title': title});
+      FormData data = FormData.fromMap({'cv': multiPartFile});
       Response response = await _dio.post(
         ApiEndPoints.postUserCv,
         options: Options(
@@ -130,7 +129,7 @@ class ReviewsService {
     }
   }
 
-  Future<Review> postAiReview(String userToken, int cvID) async {
+  Future<Review> postAiReview(String userToken, int cvID, String title) async {
     try {
       print("getting review in Service");
       Response response = await _dio.post(
@@ -140,7 +139,7 @@ class ReviewsService {
             "Authorization": "Bearer $userToken",
           },
         ),
-        data: {"cv": cvID},
+        data: {"cv": cvID, "title": title},
       );
 
       if (response.statusCode == 200) {

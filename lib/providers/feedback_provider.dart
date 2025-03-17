@@ -27,6 +27,11 @@ class FeedBackProvider extends ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
+  toggleIsReviewFavorite() {
+    isReviewFavorite = !isReviewFavorite!;
+    notifyListeners();
+  }
+
   Future<void> fetchReviewByID(int reviewId) async {
     _isLoading = true;
     singleFeedBack = null;
@@ -72,8 +77,7 @@ class FeedBackProvider extends ChangeNotifier {
       print("Uploading cv in provider Cv in Service");
 
       String? userToken = await localStorageService.getUserToken();
-      postCVResponse = await _reviewsService.postCV(
-          userToken!, selectedFile, submitCvController.text);
+      postCVResponse = await _reviewsService.postCV(userToken!, selectedFile);
       notifyListeners();
       if (postCVResponse != null) {
         AppRouter.toastificationSnackBar(
@@ -99,9 +103,8 @@ class FeedBackProvider extends ChangeNotifier {
       print("getting review in provider Cv in Service");
       print("CV id is:" + postCVResponse!.id!.toString());
       String? userToken = await localStorageService.getUserToken();
-      singleFeedBack =
-          await _reviewsService.postAiReview(userToken!, postCVResponse!.id!);
-      isReviewFavorite = singleFeedBack!.isFavorite;
+      singleFeedBack = await _reviewsService.postAiReview(
+          userToken!, postCVResponse!.id!, submitCvController.text);
     } catch (e) {
       print(e.toString());
       AppRouter.toastificationSnackBar(
@@ -114,13 +117,10 @@ class FeedBackProvider extends ChangeNotifier {
 
   Future toggleFavorite() async {
     try {
+      toggleIsReviewFavorite();
       String? userToken = await localStorageService.getUserToken();
       bool isFavorite =
           await _reviewsService.toggleFavorite(userToken!, singleFeedBack!.id);
-      if (isFavorite) {
-        isReviewFavorite = singleFeedBack!.isFavorite;
-        notifyListeners();
-      }
     } catch (e) {
       print(e.toString());
     }
