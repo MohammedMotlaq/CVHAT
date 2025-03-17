@@ -159,7 +159,6 @@ class UploadCv extends StatelessWidget {
                             width: 248,
                             title: 'Submit',
                             onTap: () {
-                              feedBackProvider.changeIsLoading();
                               feedBackProvider
                                   .postCV(filePickerProvider.selectedFile);
                               //filePickerProvider.clearFile();
@@ -174,7 +173,7 @@ class UploadCv extends StatelessWidget {
                   },
                 ),
               ),
-              if (feedBackProvider.isLoading) const LoaderBlurScreen()
+              if (feedBackProvider.isUploading) const LoaderBlurScreen()
             ],
           ),
         );
