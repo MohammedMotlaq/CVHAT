@@ -53,16 +53,22 @@ class FeedBackProvider extends ChangeNotifier {
       if (selectedFile == null) {
         AppRouter.toastificationSnackBar(
             "Error", "Please Select a File", ToastificationType.error);
+        _isLoading = false;
+        notifyListeners();
         return;
       }
       if (submitCvController.text.isEmpty) {
         AppRouter.toastificationSnackBar(
             "Error", "Please Enter a Title", ToastificationType.error);
+        _isLoading = false;
+        notifyListeners();
         return;
       }
       if (selectedFile.extension != "pdf") {
         AppRouter.toastificationSnackBar(
             "Error", "Please select  a PDF file", ToastificationType.error);
+        _isLoading = false;
+        notifyListeners();
         return;
       }
       print("Uploading cv in provider Cv in Service");
@@ -74,11 +80,15 @@ class FeedBackProvider extends ChangeNotifier {
       if (postCVResponse != null) {
         AppRouter.toastificationSnackBar(
             "Success", "CV uploaded successfully", ToastificationType.success);
+        _isLoading = false;
+        notifyListeners();
         await postAIReview();
       }
     } catch (e) {
       AppRouter.toastificationSnackBar(
           "Error", "Somthing Went Wrong!", ToastificationType.error);
+      _isLoading = false;
+      notifyListeners();
     } finally {
       _isUploading = false;
       notifyListeners();
@@ -103,5 +113,10 @@ class FeedBackProvider extends ChangeNotifier {
       _isAnalyzing = false;
       notifyListeners();
     }
+  }
+
+  void changeIsLoading() {
+    _isLoading = !isLoading;
+    notifyListeners();
   }
 }
