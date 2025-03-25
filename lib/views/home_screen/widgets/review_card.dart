@@ -35,14 +35,19 @@ class ReviewCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            label,
-            style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.bold,
-                color: AppColors.textSecondary),
+          SizedBox(
+            height: 50.h,
+            child: Text(
+              label,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textSecondary),
+            ),
           ),
-          SizedBox(height: 38.h),
+          SizedBox(height: 10.h),
           Text(
             value,
             style: TextStyle(

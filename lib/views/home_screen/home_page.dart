@@ -8,6 +8,7 @@ import 'package:cvhat/views/home_screen/widgets/review_card.dart';
 import 'package:cvhat/views/reviews_history/reviews_history.dart';
 import 'package:cvhat/views/drawer/app_drawer_widget.dart';
 import 'package:cvhat/views/upload_cv_screen/upload_cv.dart';
+import 'package:cvhat/widgets/coming_soon.dart';
 import 'package:cvhat/widgets/custom_appbar.dart';
 import 'package:cvhat/widgets/empty_list_widget.dart';
 import 'package:cvhat/widgets/loader_blur_screen.dart';
@@ -59,9 +60,15 @@ class HomePage extends StatelessWidget {
                           ReviewCard(
                               label: "AI Reviews",
                               value: reviewsProvider.aiReviewsCount),
-                          ReviewCard(
-                              label: "Recruiter Feedback",
-                              value: reviewsProvider.recruiterReviewsCount),
+                          Stack(
+                            children: [
+                              ReviewCard(
+                                  label: "Recruiter Feedback",
+                                  value: reviewsProvider.recruiterReviewsCount),
+                              const ComingSoon(
+                                  height: 139, width: 165, showAnimation: false)
+                            ],
+                          ),
                         ],
                       ),
                     ),
