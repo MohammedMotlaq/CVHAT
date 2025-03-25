@@ -1,4 +1,8 @@
+import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_icons.dart';
+import 'package:cvhat/views/favorite_screen/favorite_screen.dart';
+import 'package:cvhat/views/premium_screen/premium_screen.dart';
+import 'package:cvhat/views/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 enum AuthState { login, signup, forgetPassword, otp, confirmPassword }
@@ -40,6 +44,27 @@ class UiProvider extends ChangeNotifier {
 
   void setIndex(int value) {
     index = value;
+    notifyListeners();
+  }
+
+  void changeDrawerStatus() {
+    switch (index) {
+      case 0:
+        AppRouter.popWidget();
+        break;
+      case 1:
+        AppRouter.popWidget();
+        AppRouter.pushWidget(const FavoriteScreen());
+        break;
+      case 2:
+        AppRouter.popWidget();
+        AppRouter.pushWidget(const ProfileScreen());
+        break;
+      case 3:
+        AppRouter.popWidget();
+        AppRouter.pushWidget(const PremiumScreen());
+        break;
+    }
     notifyListeners();
   }
 
