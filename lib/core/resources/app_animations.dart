@@ -3,4 +3,5 @@ class AppAnimations {
   static const String arrow = "assets/animation/arrow.json";
   static const String favorite = "assets/animation/favorite.json";
   static const String analyze = "assets/animation/analyze.json";
+  static const String soon = "assets/animation/soon.json";
 }
