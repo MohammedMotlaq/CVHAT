@@ -39,23 +39,7 @@ class AppDrawerWidget extends StatelessWidget {
                                 index == uiProvider.index ? true : false,
                             onTap: () {
                               uiProvider.setIndex(index);
-                              switch (uiProvider.index) {
-                                case 0:
-                                  AppRouter.popWidget();
-                                  break;
-                                case 1:
-                                  AppRouter.popWidget();
-                                  AppRouter.pushWidget(const FavoriteScreen());
-                                  break;
-                                case 2:
-                                  AppRouter.popWidget();
-                                  AppRouter.pushWidget(const ProfileScreen());
-                                  break;
-                                case 3:
-                                  AppRouter.popWidget();
-                                  AppRouter.pushWidget(const PremiumScreen());
-                                  break;
-                              }
+                              uiProvider.changeDrawerStatus();
                             });
                       },
                       separatorBuilder: (context, index) =>
