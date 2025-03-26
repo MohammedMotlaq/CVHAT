@@ -74,4 +74,13 @@ class UiProvider extends ChangeNotifier {
             as IconData // Ensure it's casted correctly
         : drawerList[itemIndex]["icon"];
   }
+
+  bool editProfile = false;
+  double containerHeight = 0;
+
+  void changeEditProfile() {
+    editProfile = !editProfile;
+    containerHeight = editProfile ? 320 : 0;
+    notifyListeners();
+  }
 }
