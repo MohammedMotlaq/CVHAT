@@ -18,6 +18,7 @@ class DummyData {
       "ID": 3,
       "isAI": true,
       "isFavorite": false,
+      "title": "Oday",
       "CV": {
         "title": "Oday",
         "coverImageUrlLow":
@@ -30,8 +31,9 @@ class DummyData {
       "ID": 17,
       "isAI": true,
       "isFavorite": false,
+      "title": "yousef",
       "CV": {
-        "title": "Oday",
+        "title": "yousef",
         "coverImageUrlLow":
             "https://cvhat.blob.core.windows.net/uploads/2/7e87cddc-8d17-46d3-b0cc-119e73738814/854e6f05-9d33-4829-a35c-5d0f1516c6d5.png",
         "fileName": "OdayAbumettleqResume.pdf"
@@ -42,8 +44,9 @@ class DummyData {
       "ID": 20,
       "isAI": true,
       "isFavorite": false,
+      "title": "Mohammed",
       "CV": {
-        "title": "FrontEnd",
+        "title": "Mohammed",
         "coverImageUrlLow":
             "https://cvhat.blob.core.windows.net/uploads/2/61fd1499-b0c0-4aba-b4ad-41ca0f59e426/c0fc0818-b532-4a4c-8eac-bbb2ecd7d246.png",
         "fileName": "OdayAbumettleqResume.pdf"
