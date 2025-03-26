@@ -2,6 +2,7 @@ import 'package:animator/animator.dart';
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/providers/profile_provider.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/views/home_screen/widgets/recent_reviews_list.dart';
 import 'package:cvhat/views/home_screen/widgets/review_card.dart';
@@ -26,6 +27,9 @@ class HomePage extends StatelessWidget {
     Provider.of<ReviewsProvider>(AppRouter.navKey.currentContext!,
             listen: false)
         .fetchReviewsCounts();
+    Provider.of<ProfileProvider>(AppRouter.navKey.currentContext!,
+            listen: false)
+        .fetchProfile();
   }
 
   @override
