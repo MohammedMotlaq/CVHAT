@@ -13,6 +13,8 @@ class UploadCvAppBar extends StatelessWidget implements PreferredSizeWidget {
     return Consumer<FilePickerProvider>(
         builder: (context, filePickerProvider, child) {
       return AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
         backgroundColor: AppColors.bgWhite,
         leading: IconButton(
             onPressed: () {
