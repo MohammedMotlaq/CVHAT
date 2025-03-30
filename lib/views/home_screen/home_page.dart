@@ -146,14 +146,14 @@ class HomePage extends StatelessWidget {
                     duration: const Duration(milliseconds: 1000),
                     cycles: 0,
                     curve: Curves.easeInOut,
-                    tween: Tween(begin: 55.0.sp, end: 60.0.sp),
+                    tween: Tween(begin: 58.0.sp, end: 60.0.sp),
                     builder: (context, animateState, child) {
                       return Positioned(
                           bottom: 20.h,
                           right: 14.w,
                           child: ElevatedButton(
                             onPressed: () {
-                              reviewsProvider.fetchRecentReviews();
+                              AppRouter.pushWidget(const UploadCv());
                             },
                             style: ElevatedButton.styleFrom(
                               shape: const CircleBorder(),
@@ -173,27 +173,6 @@ class HomePage extends StatelessWidget {
                             ),
                           ));
                     }),
-                Positioned(
-                    bottom: 20.h,
-                    right: 14.w,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        AppRouter.pushWidget(const UploadCv());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        backgroundColor: AppColors.secondary_3,
-                        elevation: 9,
-                        shadowColor: Colors.black,
-                        minimumSize:
-                            Size(60.w, 60.h), // Circular button with 60 radius
-                      ),
-                      child: Icon(
-                        Icons.add_rounded, // Or any icon you want to use
-                        size: 32.sp,
-                        color: Colors.white,
-                      ),
-                    )),
               ],
             ),
             if (authProvider.isLoading) const Center(child: LoaderBlurScreen())
