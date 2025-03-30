@@ -1,6 +1,5 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/services/local_storage_service.dart';
-import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart';
 import '../models/review_model.dart';
@@ -11,6 +10,7 @@ class ReviewsProvider extends ChangeNotifier {
 
   List<Review> _reviews = [];
   List<Review> _recentReviews = [];
+  List<Review> _favoriteReviews = [];
   String _aiReviewsCount = "0";
   String _recruiterReviewsCount = "0";
   final LocalStorageService localStorageService =
@@ -20,6 +20,8 @@ class ReviewsProvider extends ChangeNotifier {
   String? _errorMessage;
 
   List<Review> get reviews => _reviews;
+
+  List<Review> get favoriteReviews => _favoriteReviews;
 
   List<Review> get recentReviews => _recentReviews;
 
@@ -66,18 +68,20 @@ class ReviewsProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchFavoriteReviews(String? type) async {
+  Future<void> fetchFavoriteReviews() async {
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
 
     try {
       String? userToken = await localStorageService.getUserToken();
-      _recentReviews = await _reviewsService.fetchFavoriteReviews(userToken!);
+      _favoriteReviews = await _reviewsService.fetchFavoriteReviews(userToken!);
+      AppRouter.toastificationSnackBar("Success",
+          "All Favorite Reviews Retrieved!", ToastificationType.error);
     } catch (e) {
       _errorMessage = e.toString();
       AppRouter.toastificationSnackBar(
-          "Error", _errorMessage!, ToastificationType.error);
+          "Error", "Error Fetching Favorite Reviews", ToastificationType.error);
     } finally {
       _isLoading = false;
       notifyListeners();
