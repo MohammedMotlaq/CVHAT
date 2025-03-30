@@ -96,4 +96,43 @@ class ProfileService {
       throw Exception("Profile update failed: ${error.toString()}");
     }
   }
+
+  Future<void> changePassword(
+      String userToken, String oldPassword, String newPassword) async {
+    try {
+      print("Changing password at: ${ApiEndPoints.postNewPassword}");
+
+      Map<String, dynamic> data = {
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+      };
+
+      print("Request Data: $data");
+
+      Response response = await _dio.post(
+        ApiEndPoints.postNewPassword,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+            "Content-Type": "application/json",
+          },
+        ),
+        data: data, // Send JSON payload
+      );
+
+      print("Response: ${response.data}");
+
+      if (response.statusCode == 200) {
+        print("Password changed successfully");
+      } else {
+        throw Exception("Error changing password!");
+      }
+    } catch (error) {
+      if (error is DioException) {
+        print(
+            "Error Response: ${error.response?.data}"); // Print server error details
+      }
+      throw Exception("Password change failed: ${error.toString()}");
+    }
+  }
 }
