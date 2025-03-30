@@ -5,6 +5,7 @@ import 'package:cvhat/services/local_storage_service.dart';
 import 'package:cvhat/services/reviews_service.dart';
 import 'package:cvhat/views/feedback_screen/feedback_page.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:toastification/toastification.dart' show ToastificationType;
 
@@ -15,7 +16,7 @@ class FeedBackProvider extends ChangeNotifier {
   TextEditingController submitCvController = TextEditingController();
   CV? postCVResponse;
   Review? singleFeedBack;
-  bool? isReviewFavorite;
+  bool isReviewFavorite = false;
   bool _isLoading = false;
   bool _isUploading = false;
   bool _isAnalyzing = false;
@@ -28,7 +29,7 @@ class FeedBackProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   toggleIsReviewFavorite() {
-    isReviewFavorite = !isReviewFavorite!;
+    isReviewFavorite = !isReviewFavorite;
     notifyListeners();
   }
 
@@ -74,7 +75,9 @@ class FeedBackProvider extends ChangeNotifier {
             "Error", "Please select  a PDF file", ToastificationType.error);
         return;
       }
-      print("Uploading cv in provider Cv in Service");
+      if (kDebugMode) {
+        print("Uploading cv in provider Cv in Service");
+      }
 
       String? userToken = await localStorageService.getUserToken();
       postCVResponse = await _reviewsService.postCV(userToken!, selectedFile);
@@ -86,7 +89,7 @@ class FeedBackProvider extends ChangeNotifier {
       }
     } catch (e) {
       AppRouter.toastificationSnackBar(
-          "Error", "Somthing Went Wrong!", ToastificationType.error);
+          "Error", "Something Went Wrong!", ToastificationType.error);
     } finally {
       _isUploading = false;
       notifyListeners();
@@ -100,13 +103,17 @@ class FeedBackProvider extends ChangeNotifier {
     notifyListeners();
     AppRouter.pushWithReplacement(const FeedbackPage());
     try {
-      print("getting review in provider Cv in Service");
-      print("CV id is:" + postCVResponse!.id!.toString());
+      if (kDebugMode) {
+        print("getting review in provider Cv in Service");
+        print("CV id is:${postCVResponse!.id!}");
+      }
       String? userToken = await localStorageService.getUserToken();
       singleFeedBack = await _reviewsService.postAiReview(
           userToken!, postCVResponse!.id!, submitCvController.text);
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
       AppRouter.toastificationSnackBar(
           "Error", "Error PostingAi Review", ToastificationType.error);
     } finally {
@@ -116,13 +123,33 @@ class FeedBackProvider extends ChangeNotifier {
   }
 
   Future toggleFavorite() async {
+    _isLoading = true;
+    notifyListeners();
+    if (singleFeedBack == null) {
+      AppRouter.toastificationSnackBar(
+          "Error", "Review Not Found", ToastificationType.error);
+      return;
+    }
     try {
-      toggleIsReviewFavorite();
       String? userToken = await localStorageService.getUserToken();
-      bool isFavorite =
-          await _reviewsService.toggleFavorite(userToken!, singleFeedBack!.id);
+      await _reviewsService.toggleFavorite(userToken!, singleFeedBack!.id);
+      toggleIsReviewFavorite();
+      isReviewFavorite
+          ? AppRouter.toastificationSnackBar(
+              "Success",
+              "This Review Added to your Favorites.",
+              ToastificationType.success)
+          : AppRouter.toastificationSnackBar(
+              "Success",
+              "This Review Removed From your Favorites.",
+              ToastificationType.success);
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 }

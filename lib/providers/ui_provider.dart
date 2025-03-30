@@ -54,7 +54,7 @@ class UiProvider extends ChangeNotifier {
         break;
       case 1:
         AppRouter.popWidget();
-        AppRouter.pushWidget(const FavoriteScreen());
+        AppRouter.pushWidget(FavoriteScreen());
         break;
       case 2:
         AppRouter.popWidget();

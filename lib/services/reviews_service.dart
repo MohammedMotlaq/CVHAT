@@ -155,6 +155,7 @@ class ReviewsService {
   }
 
   Future<bool> toggleFavorite(String userToken, int reviewID) async {
+    print("in toggle favorite in service");
     try {
       Response response = await _dio.post(
         "${ApiEndPoints.toggleFavorite}/$reviewID",
