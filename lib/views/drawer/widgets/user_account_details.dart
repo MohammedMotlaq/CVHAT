@@ -28,7 +28,7 @@ class UserAccountDetails extends StatelessWidget {
               child: Image.network(
                 width: 75.w,
                 height: 75.w,
-                profileProvider.profile!.avatarURL,
+                profileProvider.profile?.avatarURL ?? "",
                 fit: BoxFit.cover,
                 loadingBuilder: (BuildContext context, Widget child,
                     ImageChunkEvent? loadingProgress) {
