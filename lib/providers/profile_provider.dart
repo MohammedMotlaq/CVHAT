@@ -2,6 +2,7 @@ import 'package:cvhat/app_router.dart';
 import 'package:cvhat/models/profile_model.dart';
 import 'package:cvhat/services/local_storage_service.dart';
 import 'package:cvhat/services/profile_service.dart';
+import 'package:cvhat/views/auth/register_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -22,6 +23,8 @@ class ProfileProvider extends ChangeNotifier {
   String? get errorMessage => _errorMessage;
 
   PlatformFile? selectedFile;
+
+  bool _isChangePassword = false;
 
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -50,7 +53,54 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> postAvatar(PlatformFile? selectedFile) async {
+  Future<void> updateProfile() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      if (selectedFile != null) {
+        await _postAvatar();
+      }
+      if (firstNameController.text.isNotEmpty &&
+          lastNameController.text.isNotEmpty) {
+        await _updateUserName();
+      }
+
+      if (oldPasswordController.text.isNotEmpty &&
+          newPasswordController.text.isNotEmpty) {
+        _isChangePassword = true;
+        notifyListeners();
+        await _changePassword();
+      }
+      if (selectedFile == null &&
+          firstNameController.text.isEmpty &&
+          lastNameController.text.isEmpty &&
+          oldPasswordController.text.isEmpty &&
+          newPasswordController.text.isEmpty) {
+        AppRouter.toastificationSnackBar(
+            "All Set", "Nothing To Be Updated!", ToastificationType.info);
+        return;
+      }
+
+      clearFile();
+      _clearControllers();
+      if (!_isChangePassword) {
+        fetchProfile();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      } else {
+        AppRouter.toastificationSnackBar(
+            "Error", "Something Went Wrong!", ToastificationType.error);
+      }
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> _postAvatar() async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -59,7 +109,7 @@ class ProfileProvider extends ChangeNotifier {
             "Error", "Please Select Avatar!", ToastificationType.error);
         return;
       }
-      if (selectedFile.extension != "jpg") {
+      if (selectedFile!.extension != "jpg") {
         AppRouter.toastificationSnackBar(
             "Error", "Please select jpg file", ToastificationType.error);
         return;
@@ -68,7 +118,7 @@ class ProfileProvider extends ChangeNotifier {
         print("Uploading Avatar in profile provider");
       }
       String? userToken = await localStorageService.getUserToken();
-      await _profileService.postAvatar(userToken!, selectedFile);
+      await _profileService.postAvatar(userToken!, selectedFile!);
       notifyListeners();
       AppRouter.toastificationSnackBar(
           "Success", "Avatar Updated Successfully", ToastificationType.success);
@@ -77,12 +127,14 @@ class ProfileProvider extends ChangeNotifier {
         print(e.toString());
       } else {
         AppRouter.toastificationSnackBar(
-            "Error", "Something Went Wrong!", ToastificationType.error);
+            "Error",
+            "Something Went Wrong! Upload Avatar Failed!",
+            ToastificationType.error);
       }
     }
   }
 
-  Future<void> updateUserName() async {
+  Future<void> _updateUserName() async {
     _isLoading = true;
     notifyListeners();
     try {
@@ -97,12 +149,14 @@ class ProfileProvider extends ChangeNotifier {
         print(e.toString());
       } else {
         AppRouter.toastificationSnackBar(
-            "Error", "Something Went Wrong!", ToastificationType.error);
+            "Error",
+            "Something Went Wrong! Update User Name Failed!",
+            ToastificationType.error);
       }
     }
   }
 
-  Future<void> changePassword() async {
+  Future<void> _changePassword() async {
     if (newPasswordController.text.trim() !=
         confirmPasswordController.text.trim()) {
       _errorMessage = "New password and confirm password do not match!";
@@ -120,14 +174,20 @@ class ProfileProvider extends ChangeNotifier {
       String? userToken = await localStorageService.getUserToken();
       await _profileService.changePassword(userToken!,
           oldPasswordController.text.trim(), newPasswordController.text.trim());
-
-      AppRouter.toastificationSnackBar("Success",
-          "Password changed successfully!", ToastificationType.success);
-    } catch (e) {
-      _errorMessage = e.toString();
-      print(_errorMessage);
       AppRouter.toastificationSnackBar(
-          "Error", _errorMessage!, ToastificationType.error);
+          "Success",
+          "Password changed successfully! Please Login Again.",
+          ToastificationType.success);
+      await localStorageService.clearUserData();
+      AppRouter.pushAndRemoveUntil(const RegisterScreen());
+    } catch (e) {
+      if (kDebugMode) {
+        print(_errorMessage);
+      }
+      AppRouter.toastificationSnackBar(
+          "Error",
+          "Something Wont Wrong!\nMake Sure you Provide the Correct Password!",
+          ToastificationType.error);
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -161,6 +221,15 @@ class ProfileProvider extends ChangeNotifier {
   void clearFile() {
     selectedFile = null;
     _errorMessage = null;
+    notifyListeners();
+  }
+
+  void _clearControllers() {
+    firstNameController.clear();
+    lastNameController.clear();
+    oldPasswordController.clear();
+    newPasswordController.clear();
+    confirmPasswordController.clear();
     notifyListeners();
   }
 }
