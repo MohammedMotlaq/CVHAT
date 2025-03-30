@@ -37,7 +37,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
             radius: 35.r,
             backgroundColor: AppColors.bgWhite,
             child: Text(
-              userName[0].toUpperCase(),
+              userName.toUpperCase(),
               style: TextStyle(
                   color: AppColors.textPrimary,
                   fontSize: 24.sp,

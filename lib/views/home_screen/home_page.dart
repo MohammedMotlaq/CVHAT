@@ -34,13 +34,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ReviewsProvider>(
-        builder: (context, reviewsProvider, child) {
+    return Consumer2<ReviewsProvider, ProfileProvider>(
+        builder: (context, reviewsProvider, profileProvider, child) {
       return Scaffold(
         backgroundColor: AppColors.secondary,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(70.h),
-            child: const CustomAppbar(userName: "Mohammed")),
+            child: CustomAppbar(
+                userName: profileProvider.profile?.firstName[0] ?? "")),
         drawer: const AppDrawerWidget(),
         body: Stack(
           children: [
