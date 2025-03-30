@@ -87,8 +87,8 @@ class ProfileProvider extends ChangeNotifier {
     notifyListeners();
     try {
       String? userToken = await localStorageService.getUserToken();
-      await _profileService.updateUserName(
-          userToken!, firstNameController.text, lastNameController.text);
+      await _profileService.updateUserName(userToken!,
+          firstNameController.text.trim(), lastNameController.text.trim());
       notifyListeners();
       AppRouter.toastificationSnackBar(
           "Success", "Name Updated Successfully", ToastificationType.success);
@@ -99,6 +99,38 @@ class ProfileProvider extends ChangeNotifier {
         AppRouter.toastificationSnackBar(
             "Error", "Something Went Wrong!", ToastificationType.error);
       }
+    }
+  }
+
+  Future<void> changePassword() async {
+    if (newPasswordController.text.trim() !=
+        confirmPasswordController.text.trim()) {
+      _errorMessage = "New password and confirm password do not match!";
+      AppRouter.toastificationSnackBar(
+          "Error", _errorMessage!, ToastificationType.error);
+      notifyListeners();
+      return;
+    }
+
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+
+    try {
+      String? userToken = await localStorageService.getUserToken();
+      await _profileService.changePassword(userToken!,
+          oldPasswordController.text.trim(), newPasswordController.text.trim());
+
+      AppRouter.toastificationSnackBar("Success",
+          "Password changed successfully!", ToastificationType.success);
+    } catch (e) {
+      _errorMessage = e.toString();
+      print(_errorMessage);
+      AppRouter.toastificationSnackBar(
+          "Error", _errorMessage!, ToastificationType.error);
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 
