@@ -82,6 +82,26 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> updateUserName() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      String? userToken = await localStorageService.getUserToken();
+      await _profileService.updateUserName(
+          userToken!, firstNameController.text, lastNameController.text);
+      notifyListeners();
+      AppRouter.toastificationSnackBar(
+          "Success", "Name Updated Successfully", ToastificationType.success);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      } else {
+        AppRouter.toastificationSnackBar(
+            "Error", "Something Went Wrong!", ToastificationType.error);
+      }
+    }
+  }
+
   Future<void> pickFile({List<String>? allowedExtensions}) async {
     try {
       _isLoading = true;
