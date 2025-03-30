@@ -15,4 +15,6 @@ class ApiEndPoints {
   static const String postUserCv = "$baseUrl/user/cv";
   static const String toggleFavorite = "$getUserReviews/toggle-favorites/";
   static const String getProfile = "$baseUrl/user/profile";
+  static const String postAvatar = "$baseUrl/user/profile/avatar";
+  static const String postUserName = "$baseUrl/user/profile";
 }
