@@ -2,7 +2,7 @@ class Profile {
   final String firstName;
   final String lastName;
   final String email;
-  final String avatarURL;
+  final String? avatarURL;
 
   Profile(
       {required this.firstName,

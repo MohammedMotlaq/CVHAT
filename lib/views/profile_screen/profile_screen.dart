@@ -243,7 +243,9 @@ class ProfileScreen extends StatelessWidget {
                                         ? Image.network(
                                             width: 160.w,
                                             height: 160.w,
-                                            profileProvider.profile!.avatarURL,
+                                            profileProvider
+                                                    .profile?.avatarURL ??
+                                                "",
                                             fit: BoxFit.cover,
                                             loadingBuilder:
                                                 (BuildContext context,

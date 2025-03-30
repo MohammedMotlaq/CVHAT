@@ -132,9 +132,12 @@ class UploadCv extends StatelessWidget {
                             child: filePickerProvider.selectedFile != null
                                 ? Text(
                                     filePickerProvider.selectedFile!.name,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 32.sp,
+                                        fontSize: 24.sp,
                                         color: AppColors.secondary),
                                   )
                                 : const SizedBox(),
