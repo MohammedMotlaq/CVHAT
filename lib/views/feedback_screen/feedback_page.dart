@@ -1,5 +1,6 @@
 import 'package:cvhat/core/resources/app_animations.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
+import 'package:cvhat/core/resources/app_icons.dart';
 import 'package:cvhat/providers/feedback_provider.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_app_bar.dart';
 import 'package:cvhat/views/feedback_screen/widgets/feedback_comment.dart';
@@ -21,9 +22,9 @@ class FeedbackPage extends StatelessWidget {
         child: Scaffold(
           backgroundColor: AppColors.bgWhite,
           appBar: const FeedbackAppBar(),
-          body: feedBackProvider.isLoading
-              ? const LoaderBlurScreen()
-              : feedBackProvider.isAnalyzing
+          body: Stack(
+            children: [
+              feedBackProvider.isAnalyzing
                   ? const EmptyListWidget(
                       jsonFile: AppAnimations.analyze,
                       title: "Analyzing Your CV!",
@@ -44,14 +45,49 @@ class FeedbackPage extends StatelessWidget {
                             Center(
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.r),
-                                  color: AppColors.secondary,
-                                ),
+                                    borderRadius: BorderRadius.circular(20.r),
+                                    color: AppColors.secondary
+                                        .withValues(alpha: 0.05),
+                                    border: Border.all(
+                                        color: AppColors.secondary, width: 1)),
                                 width: 232.w,
                                 height: 282.h,
-                                child: Image.network(
-                                  feedBackProvider
-                                      .singleFeedBack!.cv.coverImageUrlHigh!,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  child: Image.network(
+                                    feedBackProvider.singleFeedBack?.cv
+                                            .coverImageUrlHigh! ??
+                                        "",
+                                    fit: BoxFit.fill,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      } else {
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            color: AppColors.secondary,
+                                            value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                    null
+                                                ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                    (loadingProgress
+                                                            .expectedTotalBytes ??
+                                                        1)
+                                                : null,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    errorBuilder: (context, child, stackTrace) {
+                                      return Image.asset(
+                                        AppIcons.cv,
+                                        fit: BoxFit.fill,
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
                             ),
@@ -59,7 +95,7 @@ class FeedbackPage extends StatelessWidget {
                               height: 18.h,
                             ),
                             Text(
-                              "Comments on your resume:",
+                              "Comments on your CV:",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textSecondary,
@@ -92,6 +128,9 @@ class FeedbackPage extends StatelessWidget {
                         ),
                       ),
                     ),
+              if (feedBackProvider.isLoading) const LoaderBlurScreen()
+            ],
+          ),
           floatingActionButton: FloatingActionButton(
             shape: const CircleBorder(),
             backgroundColor: AppColors.secondary_3,
@@ -100,7 +139,7 @@ class FeedbackPage extends StatelessWidget {
               feedBackProvider.toggleFavorite();
             },
             child: Icon(
-              feedBackProvider.isReviewFavorite!
+              feedBackProvider.isReviewFavorite
                   ? Icons.favorite
                   : Icons.favorite_border_rounded,
               size: 24.w,
