@@ -17,4 +17,5 @@ class ApiEndPoints {
   static const String getProfile = "$baseUrl/user/profile";
   static const String postAvatar = "$baseUrl/user/profile/avatar";
   static const String postUserName = "$baseUrl/user/profile";
+  static const String postNewPassword = "$baseUrl/user/profile/password";
 }
