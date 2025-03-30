@@ -63,4 +63,37 @@ class ProfileService {
       throw Exception(error.toString());
     }
   }
+
+  Future<Profile> updateUserName(
+      String userToken, String firstName, String lastName) async {
+    try {
+      print("Updating user name in Profile service...");
+
+      Map<String, dynamic> data = {
+        "firstName": firstName,
+        "lastName": lastName,
+      };
+
+      Response response = await _dio.post(
+        ApiEndPoints.postUserName,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $userToken",
+            "Content-Type": "application/json",
+          },
+        ),
+        data: data,
+      );
+
+      print(response.toString());
+
+      if (response.statusCode == 200) {
+        return Profile.fromJson(response.data["data"]["profile"]);
+      } else {
+        throw Exception("Error updating profile!");
+      }
+    } catch (error) {
+      throw Exception("Profile update failed: ${error.toString()}");
+    }
+  }
 }
