@@ -54,40 +54,46 @@ class FeedbackPage extends StatelessWidget {
                                 height: 282.h,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20.r),
-                                  child: Image.network(
-                                    feedBackProvider.singleFeedBack?.cv
-                                            .coverImageUrlHigh! ??
-                                        "",
-                                    fit: BoxFit.fill,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) {
-                                        return child;
-                                      } else {
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            color: AppColors.secondary,
-                                            value: loadingProgress
-                                                        .expectedTotalBytes !=
-                                                    null
-                                                ? loadingProgress
-                                                        .cumulativeBytesLoaded /
-                                                    (loadingProgress
-                                                            .expectedTotalBytes ??
-                                                        1)
-                                                : null,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    errorBuilder: (context, child, stackTrace) {
-                                      return Image.asset(
-                                        AppIcons.cv,
-                                        fit: BoxFit.fill,
-                                      );
-                                    },
-                                  ),
+                                  child: feedBackProvider.isLoading
+                                      ? const Center(
+                                          child: CircularProgressIndicator())
+                                      : Image.network(
+                                          feedBackProvider.singleFeedBack?.cv
+                                                  .coverImageUrlHigh! ??
+                                              "",
+                                          fit: BoxFit.fill,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent?
+                                                  loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              return child;
+                                            } else {
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: AppColors.secondary,
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          (loadingProgress
+                                                                  .expectedTotalBytes ??
+                                                              1)
+                                                      : null,
+                                                ),
+                                              );
+                                            }
+                                          },
+                                          errorBuilder:
+                                              (context, child, stackTrace) {
+                                            return Image.asset(
+                                              AppIcons.cv,
+                                              fit: BoxFit.fill,
+                                            );
+                                          },
+                                        ),
                                 ),
                               ),
                             ),
