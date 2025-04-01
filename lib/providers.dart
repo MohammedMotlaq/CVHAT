@@ -2,6 +2,7 @@ import 'package:cvhat/providers/auth_form_provider.dart';
 import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/feedback_provider.dart';
 import 'package:cvhat/providers/file_picker_provider.dart';
+import 'package:cvhat/providers/otp_provider.dart';
 import 'package:cvhat/providers/profile_provider.dart';
 import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
@@ -31,6 +32,9 @@ class Providers {
     ),
     ChangeNotifierProvider<ProfileProvider>(
       create: (_) => ProfileProvider(),
+    ),
+    ChangeNotifierProvider<OTPProvider>(
+      create: (_) => OTPProvider(),
     ),
   ].toList();
 }

@@ -74,7 +74,7 @@ class LoginWidget extends StatelessWidget {
                         fontWeight: FontWeight.normal)),
                 TextButton(
                   onPressed: () async {
-                    await authProvider.loadUser();
+                    uiProvider.setAuthState(AuthState.forgetPassword);
                   },
                   child: Text(
                     "Reset here",
