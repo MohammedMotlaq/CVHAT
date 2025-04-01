@@ -18,4 +18,8 @@ class ApiEndPoints {
   static const String postAvatar = "$baseUrl/user/profile/avatar";
   static const String postUserName = "$baseUrl/user/profile";
   static const String postNewPassword = "$baseUrl/user/profile/password";
+
+  static const String sendOtp = "$baseUrl/user/auth/send-otp";
+  static const String verifyOtp = "$baseUrl/user/auth/verify-otp";
+  static const String resetPassword = "$baseUrl/user/auth/reset-password";
 }
