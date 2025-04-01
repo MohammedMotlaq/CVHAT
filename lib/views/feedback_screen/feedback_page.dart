@@ -111,7 +111,8 @@ class FeedbackPage extends StatelessWidget {
                               separatorBuilder: (context, index) =>
                                   SizedBox(height: 25.h),
                               itemCount: feedBackProvider
-                                  .singleFeedBack!.comments!.length,
+                                      .singleFeedBack?.comments?.length ??
+                                  0,
                               itemBuilder: (context, index) {
                                 return FeedbackComment(
                                   title: feedBackProvider
