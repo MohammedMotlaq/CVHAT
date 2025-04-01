@@ -1,6 +1,7 @@
 import 'package:cvhat/app_router.dart';
 import 'package:cvhat/core/resources/app_colors.dart';
 import 'package:cvhat/providers/auth_provider.dart';
+import 'package:cvhat/providers/reviews_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -46,10 +47,12 @@ class ConfirmDialog extends StatelessWidget {
                       style: TextStyle(
                           fontSize: 16.sp, color: AppColors.textBlack)),
                 ),
-                Consumer<AuthProvider>(builder: (context, authProvider, child) {
+                Consumer2<AuthProvider, ReviewsProvider>(
+                    builder: (context, authProvider, reviewsProvider, child) {
                   return TextButton(
                     onPressed: () async {
                       AppRouter.popWidget();
+                      reviewsProvider.clearAllReviewsLists();
                       await authProvider.logout();
                     },
                     style: TextButton.styleFrom(

@@ -101,4 +101,12 @@ class ReviewsProvider extends ChangeNotifier {
           "Error", _errorMessage!, ToastificationType.error);
     }
   }
+
+  clearAllReviewsLists() {
+    _reviews.clear();
+    _recentReviews.clear();
+    _favoriteReviews.clear();
+    _aiReviewsCount = "0";
+    notifyListeners();
+  }
 }
