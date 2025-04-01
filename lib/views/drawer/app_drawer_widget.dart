@@ -5,6 +5,7 @@ import 'package:cvhat/providers/auth_provider.dart';
 import 'package:cvhat/providers/ui_provider.dart';
 import 'package:cvhat/views/drawer/widgets/list_tile_widget.dart';
 import 'package:cvhat/views/drawer/widgets/user_account_details.dart';
+import 'package:cvhat/widgets/confirm_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,11 @@ class AppDrawerWidget extends StatelessWidget {
                     isSelected: false,
                     onTap: () async {
                       AppRouter.popWidget();
-                      await authProvider.logout();
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const ConfirmDialog();
+                          });
                     }),
                 SizedBox(
                   height: 20.h,
